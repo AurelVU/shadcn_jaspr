@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -34,8 +35,8 @@ class _ShadTooltipState extends State<ShadTooltip> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadTooltipScope(
+  Component build(BuildContext context) {
+    return _ShadTooltipScope(
       isVisible: _isVisible,
       onShow: _show,
       onHide: _hide,
@@ -76,9 +77,9 @@ class ShadTooltipTrigger extends StatelessComponent {
   const ShadTooltipTrigger(this.children, {super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadTooltipScope.of(context);
-    yield div(
+    return div(
       children,
       events: {
         'mouseenter': (_) => scope.onShow(),
@@ -117,11 +118,11 @@ class ShadTooltipContent extends StatelessComponent {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadTooltipScope.of(context);
-    if (!scope.isVisible) return;
+    if (!scope.isVisible) return Component.fragment([]);
 
-    yield div(
+    return div(
       children,
       classes: cn([
         'absolute z-50 w-fit rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95',

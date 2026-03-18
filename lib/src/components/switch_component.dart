@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -42,10 +43,10 @@ class _ShadSwitchState extends State<ShadSwitch> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final state = _checked ? 'checked' : 'unchecked';
     final sizeName = component.size == SwitchSize.defaultSize ? 'default' : 'sm';
-    yield button(
+    return button(
       [
         span(
           [],
@@ -60,7 +61,7 @@ class _ShadSwitchState extends State<ShadSwitch> {
           attributes: {'data-slot': 'switch-thumb', 'data-state': state},
         ),
       ],
-      disabled: component.isDisabled ? true : null,
+      disabled: component.isDisabled,
       onClick: _toggle,
       classes: cn([
         'peer inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50',

@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -9,8 +10,8 @@ class ShadCard extends StatelessComponent {
   const ShadCard(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn([
         'flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm',
@@ -28,8 +29,8 @@ class ShadCardHeader extends StatelessComponent {
   const ShadCardHeader(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn([
         '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
@@ -47,8 +48,8 @@ class ShadCardTitle extends StatelessComponent {
   const ShadCardTitle(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['leading-none font-semibold', className]),
       attributes: {'data-slot': 'card-title'},
@@ -63,8 +64,8 @@ class ShadCardDescription extends StatelessComponent {
   const ShadCardDescription(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['text-sm text-muted-foreground', className]),
       attributes: {'data-slot': 'card-description'},
@@ -79,8 +80,8 @@ class ShadCardContent extends StatelessComponent {
   const ShadCardContent(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['px-6', className]),
       attributes: {'data-slot': 'card-content'},
@@ -95,8 +96,8 @@ class ShadCardFooter extends StatelessComponent {
   const ShadCardFooter(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['flex items-center px-6 [.border-t]:pt-6', className]),
       attributes: {'data-slot': 'card-footer'},

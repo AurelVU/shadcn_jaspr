@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -15,8 +16,8 @@ class ShadLabel extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield label(
+  Component build(BuildContext context) {
+    return label(
       children,
       htmlFor: htmlFor,
       classes: cn([

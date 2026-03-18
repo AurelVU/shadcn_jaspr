@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -17,8 +18,8 @@ class ShadSeparator extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       [],
       classes: cn([
         'shrink-0 bg-border',

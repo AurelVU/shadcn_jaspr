@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -38,14 +39,14 @@ class _ShadCheckboxState extends State<ShadCheckbox> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final state = _checked ? 'checked' : 'unchecked';
-    yield button(
+    return button(
       [
         if (_checked)
           div(
             [
-              DomComponent(
+              Component.element(
                 tag: 'svg',
                 attributes: {
                   'xmlns': 'http://www.w3.org/2000/svg',
@@ -59,7 +60,7 @@ class _ShadCheckboxState extends State<ShadCheckbox> {
                   'stroke-linejoin': 'round',
                 },
                 children: [
-                  DomComponent(
+                  Component.element(
                     tag: 'path',
                     attributes: {'d': 'M20 6 9 17l-5-5'},
                   ),
@@ -70,7 +71,7 @@ class _ShadCheckboxState extends State<ShadCheckbox> {
             attributes: {'data-slot': 'checkbox-indicator'},
           ),
       ],
-      disabled: component.isDisabled ? true : null,
+      disabled: component.isDisabled,
       onClick: _toggle,
       classes: cn([
         'peer size-4 shrink-0 rounded-[4px] border border-input shadow-xs transition-shadow outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:bg-input/30 dark:aria-invalid:ring-destructive/40 dark:data-[state=checked]:bg-primary',

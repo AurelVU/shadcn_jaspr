@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -8,8 +9,8 @@ class ShadBreadcrumb extends StatelessComponent {
   const ShadBreadcrumb(this.children, {super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield nav(
+  Component build(BuildContext context) {
+    return nav(
       children,
       attributes: {
         'aria-label': 'breadcrumb',
@@ -26,8 +27,8 @@ class ShadBreadcrumbList extends StatelessComponent {
   const ShadBreadcrumbList(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield ol(
+  Component build(BuildContext context) {
+    return ol(
       children,
       classes: cn([
         'flex flex-wrap items-center gap-1.5 text-sm break-words text-muted-foreground sm:gap-2.5',
@@ -45,8 +46,8 @@ class ShadBreadcrumbItem extends StatelessComponent {
   const ShadBreadcrumbItem(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield li(
+  Component build(BuildContext context) {
+    return li(
       children,
       classes: cn(['inline-flex items-center gap-1.5', className]),
       attributes: {'data-slot': 'breadcrumb-item'},
@@ -67,8 +68,8 @@ class ShadBreadcrumbLink extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield a(
+  Component build(BuildContext context) {
+    return a(
       children,
       href: href ?? '#',
       classes: cn(['transition-colors hover:text-foreground', className]),
@@ -84,8 +85,8 @@ class ShadBreadcrumbPage extends StatelessComponent {
   const ShadBreadcrumbPage(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield span(
+  Component build(BuildContext context) {
+    return span(
       children,
       classes: cn(['font-normal text-foreground', className]),
       attributes: {
@@ -105,11 +106,11 @@ class ShadBreadcrumbSeparator extends StatelessComponent {
   const ShadBreadcrumbSeparator({this.children, this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield li(
+  Component build(BuildContext context) {
+    return li(
       children ??
           [
-            DomComponent(
+            Component.element(
               tag: 'svg',
               attributes: {
                 'xmlns': 'http://www.w3.org/2000/svg',
@@ -123,7 +124,7 @@ class ShadBreadcrumbSeparator extends StatelessComponent {
                 'stroke-linejoin': 'round',
               },
               children: [
-                DomComponent(
+                Component.element(
                   tag: 'path',
                   attributes: {'d': 'm9 18 6-6-6-6'},
                 ),
@@ -146,10 +147,10 @@ class ShadBreadcrumbEllipsis extends StatelessComponent {
   const ShadBreadcrumbEllipsis({this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield span(
+  Component build(BuildContext context) {
+    return span(
       [
-        DomComponent(
+        Component.element(
           tag: 'svg',
           attributes: {
             'xmlns': 'http://www.w3.org/2000/svg',
@@ -163,21 +164,21 @@ class ShadBreadcrumbEllipsis extends StatelessComponent {
             'stroke-linejoin': 'round',
           },
           children: [
-            DomComponent(
+            Component.element(
               tag: 'circle',
               attributes: {'cx': '12', 'cy': '12', 'r': '1'},
             ),
-            DomComponent(
+            Component.element(
               tag: 'circle',
               attributes: {'cx': '19', 'cy': '12', 'r': '1'},
             ),
-            DomComponent(
+            Component.element(
               tag: 'circle',
               attributes: {'cx': '5', 'cy': '12', 'r': '1'},
             ),
           ],
         ),
-        span([text('More')], classes: 'sr-only'),
+        span([Component.text('More')], classes: 'sr-only'),
       ],
       classes: cn(['flex size-9 items-center justify-center', className]),
       attributes: {

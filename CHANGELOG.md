@@ -1,3 +1,9 @@
+## 0.2.0
+
+- **BREAKING**: Migrate to Jaspr 0.22.x (from 0.19.x)
+- Updated all components to use new Jaspr API (`Component.text()`, `Component.element()`, single `Component build()`)
+- Added `import 'package:jaspr/dom.dart'` for HTML element classes
+
 ## 0.1.1
 
 - Fix screenshot URLs in README for pub.dev rendering

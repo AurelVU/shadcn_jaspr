@@ -6,16 +6,18 @@ class App extends StatelessComponent {
   const App({super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield Document.head(
-      title: 'shadcn_jaspr — Component Showcase',
-      children: [
-        DomComponent(tag: 'link', attributes: {
-          'href': 'styles.css',
-          'rel': 'stylesheet',
-        }),
-      ],
-    );
-    yield ShowcasePage();
+  Component build(BuildContext context) {
+    return Component.fragment([
+      Document.head(
+        title: 'shadcn_jaspr — Component Showcase',
+        children: [
+          Component.element(tag: 'link', attributes: {
+            'href': 'styles.css',
+            'rel': 'stylesheet',
+          }),
+        ],
+      ),
+      ShowcasePage(),
+    ]);
   }
 }

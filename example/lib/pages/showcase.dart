@@ -1,18 +1,19 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 import 'package:shadcn_jaspr/shadcn_jaspr.dart';
 
 class ShowcasePage extends StatelessComponent {
   const ShowcasePage({super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       [
         // Header
         div(
           [
-            h1([text('shadcn_jaspr')], classes: 'text-4xl font-bold tracking-tight'),
-            p([text('A Dart port of shadcn/ui for Jaspr')],
+            h1([Component.text('shadcn_jaspr')], classes: 'text-4xl font-bold tracking-tight'),
+            p([Component.text('A Dart port of shadcn/ui for Jaspr')],
                 classes: 'text-lg text-muted-foreground mt-2'),
           ],
           classes: 'mb-12',
@@ -22,21 +23,21 @@ class ShowcasePage extends StatelessComponent {
         _section('Button', [
           div(
             [
-              ShadButton([text('Default')]),
-              ShadButton([text('Destructive')], variant: ButtonVariant.destructive),
-              ShadButton([text('Outline')], variant: ButtonVariant.outline),
-              ShadButton([text('Secondary')], variant: ButtonVariant.secondary),
-              ShadButton([text('Ghost')], variant: ButtonVariant.ghost),
-              ShadButton([text('Link')], variant: ButtonVariant.link),
+              ShadButton([Component.text('Default')]),
+              ShadButton([Component.text('Destructive')], variant: ButtonVariant.destructive),
+              ShadButton([Component.text('Outline')], variant: ButtonVariant.outline),
+              ShadButton([Component.text('Secondary')], variant: ButtonVariant.secondary),
+              ShadButton([Component.text('Ghost')], variant: ButtonVariant.ghost),
+              ShadButton([Component.text('Link')], variant: ButtonVariant.link),
             ],
             classes: 'flex flex-wrap gap-3',
           ),
           div(
             [
-              ShadButton([text('Small')], size: ButtonSize.sm),
-              ShadButton([text('Default')]),
-              ShadButton([text('Large')], size: ButtonSize.lg),
-              ShadButton([text('Disabled')], isDisabled: true),
+              ShadButton([Component.text('Small')], size: ButtonSize.sm),
+              ShadButton([Component.text('Default')]),
+              ShadButton([Component.text('Large')], size: ButtonSize.lg),
+              ShadButton([Component.text('Disabled')], isDisabled: true),
             ],
             classes: 'flex flex-wrap items-center gap-3 mt-4',
           ),
@@ -46,10 +47,10 @@ class ShowcasePage extends StatelessComponent {
         _section('Badge', [
           div(
             [
-              ShadBadge([text('Default')]),
-              ShadBadge([text('Secondary')], variant: BadgeVariant.secondary),
-              ShadBadge([text('Destructive')], variant: BadgeVariant.destructive),
-              ShadBadge([text('Outline')], variant: BadgeVariant.outline),
+              ShadBadge([Component.text('Default')]),
+              ShadBadge([Component.text('Secondary')], variant: BadgeVariant.secondary),
+              ShadBadge([Component.text('Destructive')], variant: BadgeVariant.destructive),
+              ShadBadge([Component.text('Outline')], variant: BadgeVariant.outline),
             ],
             classes: 'flex flex-wrap gap-3',
           ),
@@ -59,15 +60,15 @@ class ShowcasePage extends StatelessComponent {
         _section('Card', [
           ShadCard([
             ShadCardHeader([
-              ShadCardTitle([text('Card Title')]),
-              ShadCardDescription([text('Card description goes here.')]),
+              ShadCardTitle([Component.text('Card Title')]),
+              ShadCardDescription([Component.text('Card description goes here.')]),
             ]),
             ShadCardContent([
-              p([text('Card content area. Put any components here.')]),
+              p([Component.text('Card content area. Put any components here.')]),
             ]),
             ShadCardFooter([
-              ShadButton([text('Cancel')], variant: ButtonVariant.outline),
-              ShadButton([text('Save')]),
+              ShadButton([Component.text('Cancel')], variant: ButtonVariant.outline),
+              ShadButton([Component.text('Save')]),
             ]),
           ]),
         ]),
@@ -78,14 +79,14 @@ class ShowcasePage extends StatelessComponent {
             [
               div(
                 [
-                  ShadLabel([text('Email')], htmlFor: 'email'),
+                  ShadLabel([Component.text('Email')], htmlFor: 'email'),
                   ShadInput(id: 'email', type: InputType.email, placeholder: 'Enter your email'),
                 ],
                 classes: 'grid gap-2 max-w-sm',
               ),
               div(
                 [
-                  ShadLabel([text('Disabled')]),
+                  ShadLabel([Component.text('Disabled')]),
                   ShadInput(placeholder: 'Disabled input', isDisabled: true),
                 ],
                 classes: 'grid gap-2 max-w-sm',
@@ -99,7 +100,7 @@ class ShowcasePage extends StatelessComponent {
         _section('Textarea', [
           div(
             [
-              ShadLabel([text('Message')]),
+              ShadLabel([Component.text('Message')]),
               ShadTextarea(placeholder: 'Type your message here...'),
             ],
             classes: 'grid gap-2 max-w-lg',
@@ -110,9 +111,9 @@ class ShowcasePage extends StatelessComponent {
         _section('Separator', [
           div(
             [
-              p([text('Content above')]),
+              p([Component.text('Content above')]),
               ShadSeparator(),
-              p([text('Content below')]),
+              p([Component.text('Content below')]),
             ],
             classes: 'space-y-4 max-w-sm',
           ),
@@ -123,11 +124,11 @@ class ShowcasePage extends StatelessComponent {
           div(
             [
               div(
-                [ShadCheckbox(checked: true), ShadLabel([text('Accept terms and conditions')])],
+                [ShadCheckbox(checked: true), ShadLabel([Component.text('Accept terms and conditions')])],
                 classes: 'flex items-center gap-2',
               ),
               div(
-                [ShadCheckbox(isDisabled: true), ShadLabel([text('Disabled checkbox')])],
+                [ShadCheckbox(isDisabled: true), ShadLabel([Component.text('Disabled checkbox')])],
                 classes: 'flex items-center gap-2',
               ),
             ],
@@ -140,11 +141,11 @@ class ShowcasePage extends StatelessComponent {
           div(
             [
               div(
-                [ShadSwitch(), ShadLabel([text('Airplane Mode')])],
+                [ShadSwitch(), ShadLabel([Component.text('Airplane Mode')])],
                 classes: 'flex items-center gap-2',
               ),
               div(
-                [ShadSwitch(size: SwitchSize.sm), ShadLabel([text('Small switch')])],
+                [ShadSwitch(size: SwitchSize.sm), ShadLabel([Component.text('Small switch')])],
                 classes: 'flex items-center gap-2',
               ),
             ],
@@ -161,11 +162,11 @@ class ShowcasePage extends StatelessComponent {
                 className: 'w-[180px]',
               ),
               ShadSelectContent([
-                ShadSelectItem(value: 'apple', children: [text('Apple')]),
-                ShadSelectItem(value: 'banana', children: [text('Banana')]),
-                ShadSelectItem(value: 'orange', children: [text('Orange')]),
+                ShadSelectItem(value: 'apple', children: [Component.text('Apple')]),
+                ShadSelectItem(value: 'banana', children: [Component.text('Banana')]),
+                ShadSelectItem(value: 'orange', children: [Component.text('Orange')]),
                 ShadSelectSeparator(),
-                ShadSelectItem(value: 'grape', children: [text('Grape')]),
+                ShadSelectItem(value: 'grape', children: [Component.text('Grape')]),
               ]),
             ],
           ),
@@ -176,11 +177,11 @@ class ShowcasePage extends StatelessComponent {
           ShadRadioGroup(
             value: 'comfortable',
             children: [
-              div([ShadRadioGroupItem(value: 'default'), ShadLabel([text('Default')])],
+              div([ShadRadioGroupItem(value: 'default'), ShadLabel([Component.text('Default')])],
                   classes: 'flex items-center gap-2'),
-              div([ShadRadioGroupItem(value: 'comfortable'), ShadLabel([text('Comfortable')])],
+              div([ShadRadioGroupItem(value: 'comfortable'), ShadLabel([Component.text('Comfortable')])],
                   classes: 'flex items-center gap-2'),
-              div([ShadRadioGroupItem(value: 'compact'), ShadLabel([text('Compact')])],
+              div([ShadRadioGroupItem(value: 'compact'), ShadLabel([Component.text('Compact')])],
                   classes: 'flex items-center gap-2'),
             ],
           ),
@@ -192,22 +193,22 @@ class ShowcasePage extends StatelessComponent {
             defaultValue: 'account',
             children: [
               ShadTabsList([
-                ShadTabsTrigger(value: 'account', children: [text('Account')]),
-                ShadTabsTrigger(value: 'password', children: [text('Password')]),
+                ShadTabsTrigger(value: 'account', children: [Component.text('Account')]),
+                ShadTabsTrigger(value: 'password', children: [Component.text('Password')]),
               ]),
               ShadTabsContent(
                 value: 'account',
                 children: [
                   ShadCard([
                     ShadCardHeader([
-                      ShadCardTitle([text('Account')]),
-                      ShadCardDescription([text('Make changes to your account here.')]),
+                      ShadCardTitle([Component.text('Account')]),
+                      ShadCardDescription([Component.text('Make changes to your account here.')]),
                     ]),
                     ShadCardContent([
-                      div([ShadLabel([text('Name')]), ShadInput(placeholder: 'Your name')],
+                      div([ShadLabel([Component.text('Name')]), ShadInput(placeholder: 'Your name')],
                           classes: 'grid gap-2'),
                     ]),
-                    ShadCardFooter([ShadButton([text('Save changes')])]),
+                    ShadCardFooter([ShadButton([Component.text('Save changes')])]),
                   ]),
                 ],
               ),
@@ -216,21 +217,21 @@ class ShowcasePage extends StatelessComponent {
                 children: [
                   ShadCard([
                     ShadCardHeader([
-                      ShadCardTitle([text('Password')]),
-                      ShadCardDescription([text('Change your password here.')]),
+                      ShadCardTitle([Component.text('Password')]),
+                      ShadCardDescription([Component.text('Change your password here.')]),
                     ]),
                     ShadCardContent([
                       div(
                         [
-                          ShadLabel([text('Current password')]),
+                          ShadLabel([Component.text('Current password')]),
                           ShadInput(type: InputType.password),
-                          ShadLabel([text('New password')]),
+                          ShadLabel([Component.text('New password')]),
                           ShadInput(type: InputType.password),
                         ],
                         classes: 'grid gap-2',
                       ),
                     ]),
-                    ShadCardFooter([ShadButton([text('Save password')])]),
+                    ShadCardFooter([ShadButton([Component.text('Save password')])]),
                   ]),
                 ],
               ),
@@ -242,11 +243,11 @@ class ShowcasePage extends StatelessComponent {
         _section('Breadcrumb', [
           ShadBreadcrumb([
             ShadBreadcrumbList([
-              ShadBreadcrumbItem([ShadBreadcrumbLink([text('Home')], href: '/')]),
+              ShadBreadcrumbItem([ShadBreadcrumbLink([Component.text('Home')], href: '/')]),
               ShadBreadcrumbSeparator(),
-              ShadBreadcrumbItem([ShadBreadcrumbLink([text('Components')], href: '/components')]),
+              ShadBreadcrumbItem([ShadBreadcrumbLink([Component.text('Components')], href: '/components')]),
               ShadBreadcrumbSeparator(),
-              ShadBreadcrumbItem([ShadBreadcrumbPage([text('Breadcrumb')])]),
+              ShadBreadcrumbItem([ShadBreadcrumbPage([Component.text('Breadcrumb')])]),
             ]),
           ]),
         ]),
@@ -256,9 +257,9 @@ class ShowcasePage extends StatelessComponent {
           ShadPagination([
             ShadPaginationContent([
               ShadPaginationItem([ShadPaginationPrevious()]),
-              ShadPaginationItem([ShadPaginationLink([text('1')], isActive: true)]),
-              ShadPaginationItem([ShadPaginationLink([text('2')])]),
-              ShadPaginationItem([ShadPaginationLink([text('3')])]),
+              ShadPaginationItem([ShadPaginationLink([Component.text('1')], isActive: true)]),
+              ShadPaginationItem([ShadPaginationLink([Component.text('2')])]),
+              ShadPaginationItem([ShadPaginationLink([Component.text('3')])]),
               ShadPaginationItem([ShadPaginationEllipsis()]),
               ShadPaginationItem([ShadPaginationNext()]),
             ]),
@@ -270,18 +271,18 @@ class ShowcasePage extends StatelessComponent {
           ShadDialog(
             children: [
               ShadDialogTrigger([
-                ShadButton([text('Open Dialog')], variant: ButtonVariant.outline),
+                ShadButton([Component.text('Open Dialog')], variant: ButtonVariant.outline),
               ]),
               ShadDialogContent([
                 ShadDialogHeader([
-                  ShadDialogTitle([text('Are you sure?')]),
+                  ShadDialogTitle([Component.text('Are you sure?')]),
                   ShadDialogDescription([
-                    text('This action cannot be undone. This will permanently delete your account.'),
+                    Component.text('This action cannot be undone. This will permanently delete your account.'),
                   ]),
                 ]),
                 ShadDialogFooter([
-                  ShadButton([text('Cancel')], variant: ButtonVariant.outline),
-                  ShadButton([text('Continue')]),
+                  ShadButton([Component.text('Cancel')], variant: ButtonVariant.outline),
+                  ShadButton([Component.text('Continue')]),
                 ]),
               ]),
             ],
@@ -293,24 +294,24 @@ class ShowcasePage extends StatelessComponent {
           ShadSheet(
             children: [
               ShadSheetTrigger([
-                ShadButton([text('Open Sheet')], variant: ButtonVariant.outline),
+                ShadButton([Component.text('Open Sheet')], variant: ButtonVariant.outline),
               ]),
               ShadSheetContent(
                 [
                   ShadSheetHeader([
-                    ShadSheetTitle([text('Edit profile')]),
-                    ShadSheetDescription([text('Make changes to your profile here.')]),
+                    ShadSheetTitle([Component.text('Edit profile')]),
+                    ShadSheetDescription([Component.text('Make changes to your profile here.')]),
                   ]),
                   div(
                     [
-                      ShadLabel([text('Name')]),
+                      ShadLabel([Component.text('Name')]),
                       ShadInput(placeholder: 'Your name'),
-                      ShadLabel([text('Username')]),
+                      ShadLabel([Component.text('Username')]),
                       ShadInput(placeholder: '@username'),
                     ],
                     classes: 'grid gap-4 p-4',
                   ),
-                  ShadSheetFooter([ShadButton([text('Save changes')])]),
+                  ShadSheetFooter([ShadButton([Component.text('Save changes')])]),
                 ],
                 side: SheetSide.right,
               ),
@@ -323,16 +324,16 @@ class ShowcasePage extends StatelessComponent {
           ShadDropdownMenu(
             children: [
               ShadDropdownMenuTrigger([
-                ShadButton([text('Open Menu')], variant: ButtonVariant.outline),
+                ShadButton([Component.text('Open Menu')], variant: ButtonVariant.outline),
               ]),
               ShadDropdownMenuContent([
-                ShadDropdownMenuLabel([text('My Account')]),
+                ShadDropdownMenuLabel([Component.text('My Account')]),
                 ShadDropdownMenuSeparator(),
-                ShadDropdownMenuItem([text('Profile')]),
-                ShadDropdownMenuItem([text('Billing')]),
-                ShadDropdownMenuItem([text('Settings')]),
+                ShadDropdownMenuItem([Component.text('Profile')]),
+                ShadDropdownMenuItem([Component.text('Billing')]),
+                ShadDropdownMenuItem([Component.text('Settings')]),
                 ShadDropdownMenuSeparator(),
-                ShadDropdownMenuItem([text('Log out')],
+                ShadDropdownMenuItem([Component.text('Log out')],
                     variant: DropdownMenuItemVariant.destructive),
               ]),
             ],
@@ -344,9 +345,9 @@ class ShowcasePage extends StatelessComponent {
           ShadTooltip(
             children: [
               ShadTooltipTrigger([
-                ShadButton([text('Hover me')], variant: ButtonVariant.outline),
+                ShadButton([Component.text('Hover me')], variant: ButtonVariant.outline),
               ]),
-              ShadTooltipContent([text('This is a tooltip')], side: TooltipSide.top),
+              ShadTooltipContent([Component.text('This is a tooltip')], side: TooltipSide.top),
             ],
           ),
         ]),
@@ -356,13 +357,13 @@ class ShowcasePage extends StatelessComponent {
           ShadPopover(
             children: [
               ShadPopoverTrigger([
-                ShadButton([text('Open Popover')], variant: ButtonVariant.outline),
+                ShadButton([Component.text('Open Popover')], variant: ButtonVariant.outline),
               ]),
               ShadPopoverContent([
                 div(
                   [
-                    h4([text('Dimensions')], classes: 'font-medium leading-none'),
-                    p([text('Set the dimensions for the layer.')],
+                    h4([Component.text('Dimensions')], classes: 'font-medium leading-none'),
+                    p([Component.text('Set the dimensions for the layer.')],
                         classes: 'text-sm text-muted-foreground'),
                   ],
                   classes: 'grid gap-2',
@@ -380,7 +381,7 @@ class ShowcasePage extends StatelessComponent {
 Component _section(String title, List<Component> children) {
   return div(
     [
-      h2([text(title)], classes: 'text-2xl font-semibold tracking-tight mb-4'),
+      h2([Component.text(title)], classes: 'text-2xl font-semibold tracking-tight mb-4'),
       ...children,
     ],
     classes: 'mb-12',

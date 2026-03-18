@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cva.dart';
 
@@ -37,8 +38,8 @@ class ShadBadge extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield span(
+  Component build(BuildContext context) {
+    return span(
       children,
       classes: _badgeVariants.resolve(variant: variant, className: className),
       attributes: {

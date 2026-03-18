@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 import 'button.dart';
@@ -10,8 +11,8 @@ class ShadPagination extends StatelessComponent {
   const ShadPagination(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield nav(
+  Component build(BuildContext context) {
+    return nav(
       children,
       classes: cn(['mx-auto flex w-full justify-center', className]),
       attributes: {
@@ -30,8 +31,8 @@ class ShadPaginationContent extends StatelessComponent {
   const ShadPaginationContent(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield ul(
+  Component build(BuildContext context) {
+    return ul(
       children,
       classes: cn(['flex flex-row items-center gap-1', className]),
       attributes: {'data-slot': 'pagination-content'},
@@ -46,8 +47,8 @@ class ShadPaginationItem extends StatelessComponent {
   const ShadPaginationItem(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield li(
+  Component build(BuildContext context) {
+    return li(
       children,
       classes: cn([className]),
       attributes: {'data-slot': 'pagination-item'},
@@ -70,8 +71,8 @@ class ShadPaginationLink extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield ShadButton(
+  Component build(BuildContext context) {
+    return ShadButton(
       children,
       variant: isActive ? ButtonVariant.outline : ButtonVariant.ghost,
       size: ButtonSize.icon,
@@ -88,10 +89,10 @@ class ShadPaginationPrevious extends StatelessComponent {
   const ShadPaginationPrevious({this.onPressed, this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield ShadButton(
+  Component build(BuildContext context) {
+    return ShadButton(
       [
-        DomComponent(
+        Component.element(
           tag: 'svg',
           attributes: {
             'xmlns': 'http://www.w3.org/2000/svg',
@@ -105,13 +106,13 @@ class ShadPaginationPrevious extends StatelessComponent {
             'stroke-linejoin': 'round',
           },
           children: [
-            DomComponent(
+            Component.element(
               tag: 'path',
               attributes: {'d': 'm15 18-6-6 6-6'},
             ),
           ],
         ),
-        span([text('Previous')]),
+        span([Component.text('Previous')]),
       ],
       variant: ButtonVariant.ghost,
       size: ButtonSize.defaultSize,
@@ -128,11 +129,11 @@ class ShadPaginationNext extends StatelessComponent {
   const ShadPaginationNext({this.onPressed, this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield ShadButton(
+  Component build(BuildContext context) {
+    return ShadButton(
       [
-        span([text('Next')]),
-        DomComponent(
+        span([Component.text('Next')]),
+        Component.element(
           tag: 'svg',
           attributes: {
             'xmlns': 'http://www.w3.org/2000/svg',
@@ -146,7 +147,7 @@ class ShadPaginationNext extends StatelessComponent {
             'stroke-linejoin': 'round',
           },
           children: [
-            DomComponent(
+            Component.element(
               tag: 'path',
               attributes: {'d': 'm9 18 6-6-6-6'},
             ),
@@ -167,10 +168,10 @@ class ShadPaginationEllipsis extends StatelessComponent {
   const ShadPaginationEllipsis({this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield span(
+  Component build(BuildContext context) {
+    return span(
       [
-        DomComponent(
+        Component.element(
           tag: 'svg',
           attributes: {
             'xmlns': 'http://www.w3.org/2000/svg',
@@ -184,21 +185,21 @@ class ShadPaginationEllipsis extends StatelessComponent {
             'stroke-linejoin': 'round',
           },
           children: [
-            DomComponent(
+            Component.element(
               tag: 'circle',
               attributes: {'cx': '12', 'cy': '12', 'r': '1'},
             ),
-            DomComponent(
+            Component.element(
               tag: 'circle',
               attributes: {'cx': '19', 'cy': '12', 'r': '1'},
             ),
-            DomComponent(
+            Component.element(
               tag: 'circle',
               attributes: {'cx': '5', 'cy': '12', 'r': '1'},
             ),
           ],
         ),
-        span([text('More pages')], classes: 'sr-only'),
+        span([Component.text('More pages')], classes: 'sr-only'),
       ],
       classes: cn([
         'flex size-9 items-center justify-center',

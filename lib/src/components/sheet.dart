@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -37,8 +38,8 @@ class _ShadSheetState extends State<ShadSheet> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadSheetScope(
+  Component build(BuildContext context) {
+    return _ShadSheetScope(
       isOpen: _isOpen,
       onOpenChange: _setOpen,
       child: div(component.children),
@@ -72,9 +73,9 @@ class ShadSheetTrigger extends StatelessComponent {
   const ShadSheetTrigger(this.children, {super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSheetScope.of(context);
-    yield div(
+    return div(
       children,
       events: {'click': (_) => scope.onOpenChange(true)},
       attributes: {'data-slot': 'sheet-trigger'},
@@ -110,63 +111,65 @@ class ShadSheetContent extends StatelessComponent {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSheetScope.of(context);
-    if (!scope.isOpen) return;
+    if (!scope.isOpen) return Component.fragment([]);
 
-    // Overlay
-    yield div(
-      [],
-      classes: 'fixed inset-0 z-50 bg-black/50 animate-in fade-in-0',
-      attributes: {'data-slot': 'sheet-overlay', 'data-state': 'open'},
-      events: {'click': (_) => scope.onOpenChange(false)},
-    );
-    // Content
-    yield div(
-      [
-        ...children,
-        if (showCloseButton)
-          button(
-            [
-              DomComponent(
-                tag: 'svg',
-                attributes: {
-                  'xmlns': 'http://www.w3.org/2000/svg',
-                  'width': '16',
-                  'height': '16',
-                  'viewBox': '0 0 24 24',
-                  'fill': 'none',
-                  'stroke': 'currentColor',
-                  'stroke-width': '2',
-                  'stroke-linecap': 'round',
-                  'stroke-linejoin': 'round',
-                },
-                children: [
-                  DomComponent(tag: 'path', attributes: {'d': 'M18 6 6 18'}),
-                  DomComponent(tag: 'path', attributes: {'d': 'm6 6 12 12'}),
-                ],
-              ),
-              span([text('Close')], classes: 'sr-only'),
-            ],
-            onClick: () => scope.onOpenChange(false),
-            classes:
-                'absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none',
-            attributes: {'data-slot': 'sheet-close'},
-          ),
-      ],
-      classes: cn([
-        'fixed z-50 flex flex-col gap-4 bg-background shadow-lg transition ease-in-out animate-in duration-500',
-        _sideClasses(),
-        className,
-      ]),
-      attributes: {
-        'data-slot': 'sheet-content',
-        'data-state': 'open',
-        'data-side': side.name,
-        'role': 'dialog',
-        'aria-modal': 'true',
-      },
-    );
+    return Component.fragment([
+      // Overlay
+      div(
+        [],
+        classes: 'fixed inset-0 z-50 bg-black/50 animate-in fade-in-0',
+        attributes: {'data-slot': 'sheet-overlay', 'data-state': 'open'},
+        events: {'click': (_) => scope.onOpenChange(false)},
+      ),
+      // Content
+      div(
+        [
+          ...children,
+          if (showCloseButton)
+            button(
+              [
+                Component.element(
+                  tag: 'svg',
+                  attributes: {
+                    'xmlns': 'http://www.w3.org/2000/svg',
+                    'width': '16',
+                    'height': '16',
+                    'viewBox': '0 0 24 24',
+                    'fill': 'none',
+                    'stroke': 'currentColor',
+                    'stroke-width': '2',
+                    'stroke-linecap': 'round',
+                    'stroke-linejoin': 'round',
+                  },
+                  children: [
+                    Component.element(tag: 'path', attributes: {'d': 'M18 6 6 18'}),
+                    Component.element(tag: 'path', attributes: {'d': 'm6 6 12 12'}),
+                  ],
+                ),
+                span([Component.text('Close')], classes: 'sr-only'),
+              ],
+              onClick: () => scope.onOpenChange(false),
+              classes:
+                  'absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none',
+              attributes: {'data-slot': 'sheet-close'},
+            ),
+        ],
+        classes: cn([
+          'fixed z-50 flex flex-col gap-4 bg-background shadow-lg transition ease-in-out animate-in duration-500',
+          _sideClasses(),
+          className,
+        ]),
+        attributes: {
+          'data-slot': 'sheet-content',
+          'data-state': 'open',
+          'data-side': side.name,
+          'role': 'dialog',
+          'aria-modal': 'true',
+        },
+      ),
+    ]);
   }
 }
 
@@ -177,8 +180,8 @@ class ShadSheetHeader extends StatelessComponent {
   const ShadSheetHeader(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['flex flex-col gap-1.5 p-4', className]),
       attributes: {'data-slot': 'sheet-header'},
@@ -193,8 +196,8 @@ class ShadSheetFooter extends StatelessComponent {
   const ShadSheetFooter(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['mt-auto flex flex-col gap-2 p-4', className]),
       attributes: {'data-slot': 'sheet-footer'},
@@ -209,8 +212,8 @@ class ShadSheetTitle extends StatelessComponent {
   const ShadSheetTitle(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['font-semibold text-foreground', className]),
       attributes: {'data-slot': 'sheet-title'},
@@ -225,8 +228,8 @@ class ShadSheetDescription extends StatelessComponent {
   const ShadSheetDescription(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn(['text-sm text-muted-foreground', className]),
       attributes: {'data-slot': 'sheet-description'},
@@ -240,9 +243,9 @@ class ShadSheetClose extends StatelessComponent {
   const ShadSheetClose(this.children, {super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSheetScope.of(context);
-    yield div(
+    return div(
       children,
       events: {'click': (_) => scope.onOpenChange(false)},
       attributes: {'data-slot': 'sheet-close'},

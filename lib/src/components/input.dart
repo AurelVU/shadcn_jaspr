@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -27,12 +28,11 @@ class ShadInput extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield input(
-      [],
+  Component build(BuildContext context) {
+    return input(
       type: type,
       value: value,
-      disabled: isDisabled ? true : null,
+      disabled: isDisabled,
       id: id,
       onInput: onInput,
       onChange: onChange,

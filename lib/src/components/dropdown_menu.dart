@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -35,8 +36,8 @@ class _ShadDropdownMenuState extends State<ShadDropdownMenu> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadDropdownMenuScope(
+  Component build(BuildContext context) {
+    return _ShadDropdownMenuScope(
       isOpen: _isOpen,
       onOpenChange: _setOpen,
       child: div(
@@ -75,9 +76,9 @@ class ShadDropdownMenuTrigger extends StatelessComponent {
   const ShadDropdownMenuTrigger(this.children, {super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadDropdownMenuScope.of(context);
-    yield div(
+    return div(
       children,
       events: {'click': (_) => scope.onOpenChange(!scope.isOpen)},
       attributes: {'data-slot': 'dropdown-menu-trigger'},
@@ -92,11 +93,11 @@ class ShadDropdownMenuContent extends StatelessComponent {
   const ShadDropdownMenuContent(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadDropdownMenuScope.of(context);
-    if (!scope.isOpen) return;
+    if (!scope.isOpen) return Component.fragment([]);
 
-    yield div(
+    return div(
       children,
       classes: cn([
         'absolute z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95',
@@ -132,9 +133,9 @@ class ShadDropdownMenuItem extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadDropdownMenuScope.of(context);
-    yield div(
+    return div(
       children,
       classes: cn([
         'relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[variant=destructive]:hover:bg-destructive/10 data-[variant=destructive]:hover:text-destructive [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4 [&_svg:not([class*=\'text-\'])]:text-muted-foreground',
@@ -165,8 +166,8 @@ class ShadDropdownMenuSeparator extends StatelessComponent {
   const ShadDropdownMenuSeparator({this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       [],
       classes: cn(['pointer-events-none -mx-1 my-1 h-px bg-border', className]),
       attributes: {
@@ -190,8 +191,8 @@ class ShadDropdownMenuLabel extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn([
         'px-2 py-1.5 text-sm font-medium',

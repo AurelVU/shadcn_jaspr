@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -49,8 +50,8 @@ class _ShadSelectState extends State<ShadSelect> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadSelectScope(
+  Component build(BuildContext context) {
+    return _ShadSelectScope(
       isOpen: _isOpen,
       selectedValue: _selectedValue,
       onToggle: _toggle,
@@ -105,15 +106,15 @@ class ShadSelectTrigger extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSelectScope.of(context);
-    yield button(
+    return button(
       [
         ...children,
         // Chevron down icon
         span(
           [
-            DomComponent(
+            Component.element(
               tag: 'svg',
               attributes: {
                 'xmlns': 'http://www.w3.org/2000/svg',
@@ -127,7 +128,7 @@ class ShadSelectTrigger extends StatelessComponent {
                 'stroke-linejoin': 'round',
               },
               children: [
-                DomComponent(
+                Component.element(
                   tag: 'path',
                   attributes: {'d': 'm6 9 6 6 6-6'},
                 ),
@@ -156,10 +157,10 @@ class ShadSelectValue extends StatelessComponent {
   const ShadSelectValue({this.placeholder, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSelectScope.of(context);
-    yield span(
-      [text(scope.selectedValue ?? placeholder ?? '')],
+    return span(
+      [Component.text(scope.selectedValue ?? placeholder ?? '')],
       classes: 'line-clamp-1 flex items-center gap-2',
       attributes: {'data-slot': 'select-value'},
     );
@@ -173,11 +174,11 @@ class ShadSelectContent extends StatelessComponent {
   const ShadSelectContent(this.children, {this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSelectScope.of(context);
-    if (!scope.isOpen) return;
+    if (!scope.isOpen) return Component.fragment([]);
 
-    yield div(
+    return div(
       [
         div(children, classes: 'p-1'),
       ],
@@ -206,17 +207,17 @@ class ShadSelectItem extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadSelectScope.of(context);
     final isSelected = scope.selectedValue == value;
 
-    yield div(
+    return div(
       [
         ...children,
         if (isSelected)
           span(
             [
-              DomComponent(
+              Component.element(
                 tag: 'svg',
                 attributes: {
                   'xmlns': 'http://www.w3.org/2000/svg',
@@ -230,7 +231,7 @@ class ShadSelectItem extends StatelessComponent {
                   'stroke-linejoin': 'round',
                 },
                 children: [
-                  DomComponent(
+                  Component.element(
                     tag: 'path',
                     attributes: {'d': 'M20 6 9 17l-5-5'},
                   ),
@@ -263,8 +264,8 @@ class ShadSelectSeparator extends StatelessComponent {
   const ShadSelectSeparator({this.className, super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       [],
       classes: cn(['pointer-events-none -mx-1 my-1 h-px bg-border', className]),
       attributes: {'data-slot': 'select-separator'},

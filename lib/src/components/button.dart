@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cva.dart';
 
@@ -53,10 +54,10 @@ class ShadButton extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield button(
+  Component build(BuildContext context) {
+    return button(
       children,
-      disabled: isDisabled ? true : null,
+      disabled: isDisabled,
       onClick: onPressed,
       classes: _buttonVariants.resolve(variant: variant, size: size, className: className),
       attributes: {

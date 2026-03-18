@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -27,11 +28,11 @@ class ShadTextarea extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield textarea(
+  Component build(BuildContext context) {
+    return textarea(
       [],
       id: id,
-      disabled: isDisabled ? true : null,
+      disabled: isDisabled,
       placeholder: placeholder,
       rows: rows,
       onInput: onInput,

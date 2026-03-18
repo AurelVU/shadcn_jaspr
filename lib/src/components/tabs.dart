@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 import '../utils/cva.dart';
@@ -52,8 +53,8 @@ class _ShadTabsState extends State<ShadTabs> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadTabsScope(
+  Component build(BuildContext context) {
+    return _ShadTabsScope(
       activeTab: _activeTab,
       onSelect: _selectTab,
       child: div(
@@ -104,8 +105,8 @@ class ShadTabsList extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield div(
+  Component build(BuildContext context) {
+    return div(
       children,
       classes: cn([
         _tabsListVariants.resolve(variant: variant),
@@ -136,13 +137,13 @@ class ShadTabsTrigger extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadTabsScope.of(context);
     final isActive = scope.activeTab == value;
 
-    yield button(
+    return button(
       children,
-      disabled: isDisabled ? true : null,
+      disabled: isDisabled,
       onClick: () => scope.onSelect(value),
       classes: cn([
         'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0',
@@ -175,13 +176,13 @@ class ShadTabsContent extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadTabsScope.of(context);
     final isActive = scope.activeTab == value;
 
-    if (!isActive) return;
+    if (!isActive) return Component.fragment([]);
 
-    yield div(
+    return div(
       children,
       classes: cn(['flex-1 outline-none', className]),
       attributes: {

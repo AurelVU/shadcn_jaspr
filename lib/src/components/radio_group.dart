@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -37,8 +38,8 @@ class _ShadRadioGroupState extends State<ShadRadioGroup> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadRadioGroupScope(
+  Component build(BuildContext context) {
+    return _ShadRadioGroupScope(
       selectedValue: _selectedValue,
       onSelect: _selectValue,
       child: div(
@@ -86,16 +87,16 @@ class ShadRadioGroupItem extends StatelessComponent {
   });
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadRadioGroupScope.of(context);
     final isSelected = scope.selectedValue == value;
 
-    yield button(
+    return button(
       [
         if (isSelected)
           div(
             [
-              DomComponent(
+              Component.element(
                 tag: 'svg',
                 attributes: {
                   'xmlns': 'http://www.w3.org/2000/svg',
@@ -106,7 +107,7 @@ class ShadRadioGroupItem extends StatelessComponent {
                   'stroke': 'none',
                 },
                 children: [
-                  DomComponent(
+                  Component.element(
                     tag: 'circle',
                     attributes: {'cx': '12', 'cy': '12', 'r': '12'},
                   ),
@@ -117,7 +118,7 @@ class ShadRadioGroupItem extends StatelessComponent {
             attributes: {'data-slot': 'radio-group-indicator'},
           ),
       ],
-      disabled: isDisabled ? true : null,
+      disabled: isDisabled,
       onClick: () => scope.onSelect(value),
       classes: cn([
         'aspect-square size-4 shrink-0 rounded-full border border-input text-primary shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40',

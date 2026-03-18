@@ -1,4 +1,5 @@
 import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
 
 import '../utils/cn.dart';
 
@@ -44,8 +45,8 @@ class _ShadPopoverState extends State<ShadPopover> {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield _ShadPopoverScope(
+  Component build(BuildContext context) {
+    return _ShadPopoverScope(
       isOpen: _isOpen,
       onToggle: _toggle,
       onClose: _close,
@@ -86,9 +87,9 @@ class ShadPopoverTrigger extends StatelessComponent {
   const ShadPopoverTrigger(this.children, {super.key});
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadPopoverScope.of(context);
-    yield div(
+    return div(
       children,
       events: {'click': (_) => scope.onToggle()},
       attributes: {'data-slot': 'popover-trigger'},
@@ -122,11 +123,11 @@ class ShadPopoverContent extends StatelessComponent {
   }
 
   @override
-  Iterable<Component> build(BuildContext context) sync* {
+  Component build(BuildContext context) {
     final scope = _ShadPopoverScope.of(context);
-    if (!scope.isOpen) return;
+    if (!scope.isOpen) return Component.fragment([]);
 
-    yield div(
+    return div(
       children,
       classes: cn([
         'absolute z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none animate-in fade-in-0 zoom-in-95',
