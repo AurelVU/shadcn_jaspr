@@ -11,17 +11,17 @@ Beautiful, accessible, and customizable UI components built with Tailwind CSS â€
 
 ### Light Mode
 
-![Buttons, Badge, Card](screenshots/01_buttons_badge_card.png)
+![Buttons, Badge, Card](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/01_buttons_badge_card.png)
 
-![Form Components](screenshots/02_form_components.png)
+![Form Components](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/02_form_components.png)
 
-![Tabs & Navigation](screenshots/03_tabs_navigation.png)
+![Tabs & Navigation](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/03_tabs_navigation.png)
 
-![Overlay Components](screenshots/04_overlays.png)
+![Overlay Components](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/04_overlays.png)
 
 ### Dark Mode
 
-![Dark Mode](screenshots/05_dark_mode.png)
+![Dark Mode](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/05_dark_mode.png)
 
 ## Components
 
