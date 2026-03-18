@@ -46,3 +46,42 @@ export 'src/components/sheet.dart';
 export 'src/components/dropdown_menu.dart';
 export 'src/components/tooltip.dart';
 export 'src/components/popover.dart';
+
+// Phase 1: Simple components
+export 'src/components/alert.dart';
+export 'src/components/avatar.dart';
+export 'src/components/skeleton.dart';
+export 'src/components/aspect_ratio.dart';
+
+// Phase 2: Stateful primitives
+export 'src/components/toggle.dart';
+export 'src/components/toggle_group.dart';
+export 'src/components/collapsible.dart';
+export 'src/components/accordion.dart';
+export 'src/components/progress.dart';
+
+// Phase 3: Overlay derivatives + medium
+export 'src/components/alert_dialog.dart';
+export 'src/components/hover_card.dart';
+export 'src/components/drawer.dart';
+export 'src/components/scroll_area.dart';
+export 'src/components/toast.dart';
+export 'src/components/slider.dart';
+export 'src/components/table.dart';
+
+// Phase 4: Medium-complex
+export 'src/components/context_menu.dart';
+export 'src/components/menubar.dart';
+export 'src/components/input_otp.dart';
+export 'src/components/form.dart';
+
+// Phase 5: Complex composite
+export 'src/components/navigation_menu.dart';
+export 'src/components/calendar.dart';
+export 'src/components/date_picker.dart';
+export 'src/components/command.dart';
+export 'src/components/combobox.dart';
+export 'src/components/data_table.dart';
+export 'src/components/carousel.dart';
+export 'src/components/resizable.dart';
+export 'src/components/sidebar.dart';
