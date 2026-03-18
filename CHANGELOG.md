@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Fix screenshot URLs in README for pub.dev rendering
+
 ## 0.1.0
 
 - Initial release
