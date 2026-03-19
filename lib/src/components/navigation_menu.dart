@@ -209,7 +209,7 @@ class ShadNavigationMenuContent extends StatelessComponent {
     return div(
       children,
       classes: cn([
-        'absolute left-0 top-full mt-1.5 w-full animate-in fade-in-0 zoom-in-90 md:absolute md:w-auto',
+        'absolute left-0 top-full mt-1.5 w-full rounded-md border bg-popover text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-90 md:absolute md:w-auto',
         className,
       ]),
       events: {

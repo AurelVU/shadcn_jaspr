@@ -1,5 +1,6 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr/dom.dart';
+import 'package:universal_web/web.dart' as web;
 
 import '../utils/cn.dart';
 
@@ -18,11 +19,12 @@ class _ShadContextMenuState extends State<ShadContextMenu> {
   double _y = 0;
 
   void _onContextMenu(dynamic event) {
-    event.preventDefault();
+    final e = event as web.MouseEvent;
+    e.preventDefault();
     setState(() {
       _isOpen = true;
-      _x = (event.clientX as num).toDouble();
-      _y = (event.clientY as num).toDouble();
+      _x = e.clientX.toDouble();
+      _y = e.clientY.toDouble();
     });
   }
 
@@ -107,11 +109,17 @@ class ShadContextMenuContent extends StatelessComponent {
     if (!scope.isOpen) return Component.fragment([]);
 
     return Component.fragment([
-      // Invisible backdrop to catch clicks
+      // Invisible backdrop to catch clicks and close the menu
       div(
         [],
         classes: 'fixed inset-0 z-40',
-        events: {'click': (_) => scope.onClose()},
+        events: {
+          'click': (_) => scope.onClose(),
+          'contextmenu': (dynamic event) {
+            (event as web.Event).preventDefault();
+            scope.onClose();
+          },
+        },
       ),
       div(
         children,
@@ -156,7 +164,7 @@ class ShadContextMenuItem extends StatelessComponent {
     return div(
       children,
       classes: cn([
-        'relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[variant=destructive]:hover:bg-destructive/10 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4 [&_svg:not([class*=\'text-\'])]:text-muted-foreground',
+        'relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 data-[variant=destructive]:text-destructive data-[variant=destructive]:hover:bg-destructive/10 [&_svg]:pointer-events-none [&_svg]:shrink-0',
         className,
       ]),
       events: {
@@ -187,7 +195,8 @@ class ShadContextMenuSeparator extends StatelessComponent {
   Component build(BuildContext context) {
     return div(
       [],
-      classes: cn(['pointer-events-none -mx-1 my-1 h-px bg-border', className]),
+      classes: cn(
+          ['pointer-events-none -mx-1 my-1 h-px bg-border', className]),
       attributes: {
         'data-slot': 'context-menu-separator',
         'role': 'separator',
@@ -332,7 +341,8 @@ class _ShadContextMenuRadioScope extends InheritedComponent {
   }
 
   @override
-  bool updateShouldNotify(covariant _ShadContextMenuRadioScope oldComponent) {
+  bool updateShouldNotify(
+      covariant _ShadContextMenuRadioScope oldComponent) {
     return value != oldComponent.value;
   }
 }

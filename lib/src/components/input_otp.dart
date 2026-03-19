@@ -25,6 +25,7 @@ class ShadInputOTP extends StatefulComponent {
 
 class _ShadInputOTPState extends State<ShadInputOTP> {
   late String _value;
+  bool _hasFocus = false;
 
   @override
   void initState() {
@@ -33,7 +34,6 @@ class _ShadInputOTPState extends State<ShadInputOTP> {
   }
 
   void _onInput(String raw) {
-    // Only keep digits/alphanumeric up to maxLength
     final filtered = raw.replaceAll(RegExp(r'[^0-9a-zA-Z]'), '');
     final clamped = filtered.length > component.maxLength
         ? filtered.substring(0, component.maxLength)
@@ -44,31 +44,50 @@ class _ShadInputOTPState extends State<ShadInputOTP> {
     component.onValueChange?.call(_value);
   }
 
+  void _onFocus() {
+    setState(() {
+      _hasFocus = true;
+    });
+  }
+
+  void _onBlur() {
+    setState(() {
+      _hasFocus = false;
+    });
+  }
+
   @override
   Component build(BuildContext context) {
     return _ShadInputOTPScope(
       value: _value,
       maxLength: component.maxLength,
+      hasFocus: _hasFocus,
       child: div(
         [
-          // Hidden input
+          // Hidden input that captures keyboard input — overlays the slot area
           Component.element(
             tag: 'input',
             attributes: {
               'type': 'text',
-              'class': 'absolute inset-0 opacity-0 pointer-events-none',
+              'data-slot': 'input-otp-input',
+              'class':
+                  'absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer',
+              'style': 'caret-color: transparent; letter-spacing: -1em; font-size: 1px;',
               'maxlength': '${component.maxLength}',
               'value': _value,
               'autocomplete': 'one-time-code',
               'inputmode': 'numeric',
-              'data-slot': 'input-otp-input',
             },
-            events: events<String>(onInput: _onInput),
+            events: {
+              ...events<String>(onInput: _onInput),
+              'focus': (_) => _onFocus(),
+              'blur': (_) => _onBlur(),
+            },
           ),
           ...component.children,
         ],
         classes: cn([
-          'flex items-center gap-2 has-[:disabled]:opacity-50',
+          'relative flex items-center gap-2 has-[:disabled]:opacity-50',
           component.className,
         ]),
         attributes: {
@@ -83,10 +102,12 @@ class _ShadInputOTPState extends State<ShadInputOTP> {
 class _ShadInputOTPScope extends InheritedComponent {
   final String value;
   final int maxLength;
+  final bool hasFocus;
 
   const _ShadInputOTPScope({
     required this.value,
     required this.maxLength,
+    required this.hasFocus,
     required super.child,
   });
 
@@ -97,7 +118,7 @@ class _ShadInputOTPScope extends InheritedComponent {
 
   @override
   bool updateShouldNotify(covariant _ShadInputOTPScope oldComponent) {
-    return value != oldComponent.value;
+    return value != oldComponent.value || hasFocus != oldComponent.hasFocus;
   }
 }
 
@@ -127,15 +148,16 @@ class ShadInputOTPSlot extends StatelessComponent {
   Component build(BuildContext context) {
     final scope = _ShadInputOTPScope.of(context);
     final char = index < scope.value.length ? scope.value[index] : '';
-    final isActive = index == scope.value.length;
-    final hasFakeCaret = isActive;
+    final isActive = scope.hasFocus && index == scope.value.length;
 
     return div(
       [
         Component.text(char),
-        if (hasFakeCaret)
+        if (isActive)
           div(
-            [],
+            [
+              div([], classes: 'h-4 w-px animate-pulse bg-foreground duration-1000'),
+            ],
             classes:
                 'pointer-events-none absolute inset-0 flex items-center justify-center',
             attributes: {'data-slot': 'input-otp-caret'},

@@ -10,7 +10,7 @@ enum ToggleSize { defaultSize, sm, lg }
 
 final _toggleVariants = CVA<ToggleVariant, ToggleSize>(
   base:
-      'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 outline-none',
+      'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 outline-none',
   variants: {
     ToggleVariant.defaultVariant: 'bg-transparent',
     ToggleVariant.outline:
@@ -83,6 +83,8 @@ class _ShadToggleState extends State<ShadToggle> {
         'data-slot': 'toggle',
         'data-state': _pressed ? 'on' : 'off',
         'aria-pressed': _pressed.toString(),
+        if (component.isDisabled) 'data-disabled': '',
+        if (component.isDisabled) 'aria-disabled': 'true',
       },
     );
   }

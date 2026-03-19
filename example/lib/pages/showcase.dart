@@ -378,18 +378,8 @@ class ShowcasePage extends StatelessComponent {
         ]),
 
         // ══════════════════════════════════════
-        // NEW COMPONENTS — PHASE 1: Simple
+        // PHASE 1: Simple
         // ══════════════════════════════════════
-
-        div(
-          [
-            h2([Component.text('New Components')],
-                classes: 'text-3xl font-bold tracking-tight'),
-            p([Component.text('28 newly added components')],
-                classes: 'text-muted-foreground mt-1'),
-          ],
-          classes: 'mb-8 mt-4 border-t pt-8',
-        ),
 
         // Alert
         _section('Alert', [
