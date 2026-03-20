@@ -1,3 +1,9 @@
+## 0.2.1
+
+- Added 29 new components: Alert, Avatar, Skeleton, AspectRatio, Toggle, ToggleGroup, Collapsible, Accordion, Progress, AlertDialog, HoverCard, Drawer, ScrollArea, Toast, Slider, Table, ContextMenu, Menubar, InputOTP, Form, NavigationMenu, Calendar, DatePicker, Command, Combobox, DataTable, Carousel, Resizable, Sidebar
+- Fixed 6 component bugs: Toggle disabled state, ContextMenu, InputOTP, NavigationMenu, Resizable
+- Added universal_web dependency
+
 ## 0.2.0
 
 - **BREAKING**: Migrate to Jaspr 0.22.x (from 0.19.x)
