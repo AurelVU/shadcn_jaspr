@@ -1,0 +1,66 @@
+name: Deploy Example to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install jaspr CLI
+        run: dart pub global activate jaspr_cli
+
+      - name: Install Dart dependencies
+        run: dart pub get
+
+      - name: Install example Dart dependencies
+        working-directory: example
+        run: dart pub get
+
+      - name: Install Node dependencies
+        working-directory: example
+        run: npm ci --ignore-scripts || npm install
+
+      - name: Build Tailwind CSS
+        working-directory: example
+        run: npx @tailwindcss/cli -i web/styles.tw.css -o web/styles.css
+
+      - name: Build Jaspr
+        working-directory: example
+        run: jaspr build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: example/build/jaspr
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
