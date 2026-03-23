@@ -232,6 +232,20 @@ final classes = buttonCva.resolve(
 - Jaspr `^0.22.0`
 - Tailwind CSS (for styling)
 
+## AI / LLM Integration
+
+This project ships with configuration files for AI-powered code editors and LLM agents:
+
+| File | Purpose |
+|------|---------|
+| [`llms.txt`](llms.txt) | Short index for LLM agent discovery ([llms.txt standard](https://llmstxt.org/)) |
+| [`llms-full.txt`](llms-full.txt) | Complete API reference — all 60 components, props, enums, usage examples |
+| [`CLAUDE.md`](CLAUDE.md) | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) project instructions for contributors |
+| [`.cursorrules`](.cursorrules) | [Cursor](https://cursor.com/) IDE rules with component creation templates |
+| [`.github/copilot-instructions.md`](.github/copilot-instructions.md) | [GitHub Copilot](https://github.com/features/copilot) instructions for library consumers |
+
+**For AI agents:** point your LLM at [`llms-full.txt`](https://github.com/AurelVU/shadcn_jaspr/blob/main/llms-full.txt) for the complete reference needed to generate correct code with this library.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
