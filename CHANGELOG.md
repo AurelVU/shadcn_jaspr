@@ -1,3 +1,10 @@
+## 0.4.1
+
+- Add AI-first development configuration: CLAUDE.md, llms-full.txt, llms.txt, .cursorrules, .github/copilot-instructions.md
+- Complete LLM reference with all 60 components, props, enums, and usage examples
+- Cursor IDE rules with component creation templates
+- GitHub Copilot instructions for library consumers
+
 ## 0.4.0
 
 - Added 4 new chart types: AreaChart, PieChart, RadarChart, RadialChart (6 total)
