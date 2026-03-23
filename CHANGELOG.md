@@ -1,3 +1,10 @@
+## 0.4.3
+
+- Update all screenshots for the redesigned tabbed showcase (9 screenshots covering all 8 tabs + dark mode)
+- Add screenshots metadata to pubspec.yaml for pub.dev gallery
+- Add GitHub Actions CI/CD for automatic example deployment to GitHub Pages
+- Fix README dependency version (^0.1.0 → ^0.4.2)
+
 ## 0.4.2
 
 - Add AI / LLM Integration section to README with links to all config files
