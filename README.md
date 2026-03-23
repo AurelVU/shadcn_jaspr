@@ -13,17 +13,25 @@ Beautiful, accessible, and customizable UI components built with Tailwind CSS â€
 
 ### Light Mode
 
-![Buttons, Badge, Card](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/01_buttons_badge_card.png)
+![Inputs](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/01_inputs.png)
 
-![Form Components](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/02_form_components.png)
+![Display](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/02_display.png)
 
-![Tabs & Navigation](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/03_tabs_navigation.png)
+![Navigation](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/03_navigation.png)
 
-![Overlay Components](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/04_overlays.png)
+![Overlays](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/04_overlays.png)
+
+![Layout](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/05_layout.png)
+
+![Feedback](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/06_feedback.png)
+
+![Charts](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/07_charts.png)
+
+![Blocks](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/08_blocks.png)
 
 ### Dark Mode
 
-![Dark Mode](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/05_dark_mode.png)
+![Dark Mode](https://raw.githubusercontent.com/AurelVU/shadcn_jaspr/main/screenshots/09_dark_mode.png)
 
 ## Components
 
@@ -60,7 +68,7 @@ Beautiful, accessible, and customizable UI components built with Tailwind CSS â€
 
 ```yaml
 dependencies:
-  shadcn_jaspr: ^0.1.0
+  shadcn_jaspr: ^0.4.2
 ```
 
 ### 2. Set up Tailwind CSS

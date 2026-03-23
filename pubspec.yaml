@@ -14,6 +14,18 @@ topics:
   - jaspr
   - tailwind
 
+screenshots:
+  - description: 'Input components: Button, Input, Checkbox, Switch, Select, Slider, and more'
+    path: screenshots/01_inputs.png
+  - description: 'Display components: Card, Badge, Avatar, Typography, Table, and more'
+    path: screenshots/02_display.png
+  - description: 'Navigation components: Tabs, Breadcrumb, Pagination, Sidebar'
+    path: screenshots/03_navigation.png
+  - description: 'Overlay components: Dialog, Sheet, Dropdown, Tooltip, Popover'
+    path: screenshots/04_overlays.png
+  - description: 'Dark mode support with full theme coverage'
+    path: screenshots/09_dark_mode.png
+
 environment:
   sdk: ^3.6.0
 
