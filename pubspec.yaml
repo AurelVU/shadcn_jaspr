@@ -3,7 +3,7 @@ description: >-
   A Dart port of shadcn/ui for the Jaspr web framework. Beautiful, accessible,
   and customizable UI components built with Tailwind CSS.
   Live demo: https://aurelvu.github.io/shadcn_jaspr/
-version: 0.4.1
+version: 0.4.2
 homepage: https://github.com/AurelVU/shadcn_jaspr
 repository: https://github.com/AurelVU/shadcn_jaspr
 issue_tracker: https://github.com/AurelVU/shadcn_jaspr/issues

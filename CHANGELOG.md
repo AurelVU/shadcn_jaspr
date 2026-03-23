@@ -1,3 +1,7 @@
+## 0.4.2
+
+- Add AI / LLM Integration section to README with links to all config files
+
 ## 0.4.1
 
 - Add AI-first development configuration: CLAUDE.md, llms-full.txt, llms.txt, .cursorrules, .github/copilot-instructions.md
