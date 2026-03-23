@@ -7,6 +7,8 @@ Beautiful, accessible, and customizable UI components built with Tailwind CSS �
 [![pub package](https://img.shields.io/pub/v/shadcn_jaspr.svg)](https://pub.dev/packages/shadcn_jaspr)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+**[Live Demo](https://aurelvu.github.io/shadcn_jaspr/)**
+
 ## Screenshots
 
 ### Light Mode
@@ -204,10 +206,30 @@ final classes = buttonCva.resolve(
 );
 ```
 
+### Layout & Structure
+- **Typography** — H1-H4, P, Blockquote, List, Code, Lead, Large, Small, Muted
+- **Direction** — RTL/LTR direction provider with InheritedComponent scope
+- **Empty** — Empty state with header, media, title, description, and content
+- **Item** — Composable item with media, content, title, description, actions
+- **Field** — Field set, legend, label, description, error list for structured forms
+
+### Groups & Composition
+- **Button Group** — Horizontal/vertical button grouping with border clipping
+- **Input Group** — Composite inputs with addons, buttons, and text
+- **Native Select** — Styled `<select>` with chevron icon overlay
+
+### Feedback
+- **Spinner** — Animated SVG loading spinner with accessibility attributes
+- **Kbd** — Keyboard shortcut display with group support
+- **Sonner** — Alternative toast API with CSS variable styling
+
+### Data Visualization
+- **Chart** — SVG-based charts with config, tooltip, legend, bar, and line renderers
+
 ## Requirements
 
 - Dart SDK `^3.6.0`
-- Jaspr `^0.19.0`
+- Jaspr `^0.22.0`
 - Tailwind CSS (for styling)
 
 ## Contributing

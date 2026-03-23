@@ -2,7 +2,11 @@
 @import "tw-animate-css";
 
 @source "../../lib/src/components/*.dart";
+@source "../../lib/src/blocks/*.dart";
 @source "../lib/**/*.dart";
+
+/* Force-generate arbitrary variant selectors that Tailwind's Dart scanner misses */
+@source inline("[&>*]:rounded-none [&>*]:border-collapse [&>*:focus-visible]:z-10 [&>*:first-child]:rounded-l-md [&>*:last-child]:rounded-r-md [&>*:not(:first-child)]:-ml-px [&>*:first-child]:rounded-t-md [&>*:last-child]:rounded-b-md [&>*:not(:first-child)]:-mt-px [&>button]:rounded-none [&>button]:border-0 [&>button]:shadow-none first:[&>button]:rounded-l-md last:[&>button]:rounded-r-md [&>svg]:size-3 [&>svg]:size-3.5 [&>svg]:size-4 [&>svg]:size-5 [&>svg]:size-6 [&>svg]:size-10 [&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg]:translate-y-0.5 [&>svg]:text-current [&>svg]:text-muted-foreground [&>svg]:text-foreground [&>img]:size-full [&>img]:object-cover [&>li]:mt-2 [&>tr]:last:border-b-0 [&>[role=checkbox]]:translate-y-[2px] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='size-'])]:size-3 [&_tr]:border-b [&_tr:last-child]:border-0 [&_p]:leading-relaxed [&+div]:text-xs [&:has([role=checkbox])]:pr-0 [&_[data-slot=command-group-heading]]:px-2 [&_[data-slot=command-group-heading]]:py-1.5 [&_[data-slot=command-group-heading]]:text-xs [&_[data-slot=command-group-heading]]:font-medium [&_[data-slot=command-group-heading]]:text-muted-foreground");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -129,5 +133,59 @@
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+  }
+}
+
+/* shadcn_jaspr: arbitrary child selectors that Tailwind can't extract from Dart */
+@layer components {
+  [data-slot="button-group"] > * {
+    border-radius: 0 !important;
+    border-collapse: collapse;
+  }
+  [data-slot="button-group"] > *:focus-visible {
+    z-index: 10;
+  }
+  [data-slot="button-group"][data-orientation="horizontal"] > *:first-child {
+    border-top-left-radius: var(--radius-md) !important;
+    border-bottom-left-radius: var(--radius-md) !important;
+  }
+  [data-slot="button-group"][data-orientation="horizontal"] > *:last-child {
+    border-top-right-radius: var(--radius-md) !important;
+    border-bottom-right-radius: var(--radius-md) !important;
+  }
+  [data-slot="button-group"][data-orientation="horizontal"] > *:not(:first-child) {
+    margin-left: -1px;
+  }
+  [data-slot="button-group"][data-orientation="vertical"] > *:first-child {
+    border-top-left-radius: var(--radius-md) !important;
+    border-top-right-radius: var(--radius-md) !important;
+  }
+  [data-slot="button-group"][data-orientation="vertical"] > *:last-child {
+    border-bottom-left-radius: var(--radius-md) !important;
+    border-bottom-right-radius: var(--radius-md) !important;
+  }
+  [data-slot="button-group"][data-orientation="vertical"] > *:not(:first-child) {
+    margin-top: -1px;
+  }
+
+  [data-slot="input-group-button"] > button {
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+  }
+  [data-slot="input-group-button"]:first-child > button {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
+  [data-slot="input-group-button"]:last-child > button {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+  }
+
+  /* Arbitrary child selectors for svg/img sizing */
+  [data-slot="empty-media"] > svg,
+  [data-slot="item-media"] > svg {
+    pointer-events: none;
+    flex-shrink: 0;
   }
 }

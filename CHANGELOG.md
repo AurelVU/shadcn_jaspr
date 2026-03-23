@@ -1,3 +1,27 @@
+## 0.4.0
+
+- Added 4 new chart types: AreaChart, PieChart, RadarChart, RadialChart (6 total)
+- Added 10 authentication blocks: Login 01-05, Signup 01-05 (reusable page templates)
+- Redesigned showcase app with tabbed category navigation (8 tabs: Inputs, Display, Navigation, Overlays, Layout, Feedback, Charts, Blocks)
+- Each demo section now has description text and bordered card container
+- Wider container layout (max-w-5xl) and component count badge in header
+
+## 0.3.0
+
+- Added 12 new components: Spinner, Kbd, Typography, Direction, Empty, NativeSelect, Item, ButtonGroup, InputGroup, Field, Sonner, Chart
+- Full shadcn/ui component parity (60 components total)
+- Typography system with H1-H4, P, Blockquote, List, Code, Lead, Large, Small, Muted
+- SVG-based Chart components with BarChart and LineChart renderers
+- Field/FieldSet components for structured form layouts
+- InputGroup for composite input elements with addons
+- ButtonGroup for grouped button layouts
+- NativeSelect for styled `<select>` elements
+- Direction provider for RTL/LTR support
+
+## 0.2.2
+
+- Added live demo link: https://aurelvu.github.io/shadcn_jaspr/
+
 ## 0.2.1
 
 - Added 29 new components: Alert, Avatar, Skeleton, AspectRatio, Toggle, ToggleGroup, Collapsible, Accordion, Progress, AlertDialog, HoverCard, Drawer, ScrollArea, Toast, Slider, Table, ContextMenu, Menubar, InputOTP, Form, NavigationMenu, Calendar, DatePicker, Command, Combobox, DataTable, Carousel, Resizable, Sidebar

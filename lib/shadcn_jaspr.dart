@@ -85,3 +85,29 @@ export 'src/components/data_table.dart';
 export 'src/components/carousel.dart';
 export 'src/components/resizable.dart';
 export 'src/components/sidebar.dart';
+
+// Phase 6: Final components
+export 'src/components/spinner.dart';
+export 'src/components/kbd.dart';
+export 'src/components/typography.dart';
+export 'src/components/direction.dart';
+export 'src/components/empty.dart';
+export 'src/components/native_select.dart';
+export 'src/components/item.dart';
+export 'src/components/button_group.dart';
+export 'src/components/input_group.dart';
+export 'src/components/field.dart';
+export 'src/components/sonner.dart';
+export 'src/components/chart.dart';
+
+// Authentication blocks
+export 'src/blocks/login_01.dart';
+export 'src/blocks/login_02.dart';
+export 'src/blocks/login_03.dart';
+export 'src/blocks/login_04.dart';
+export 'src/blocks/login_05.dart';
+export 'src/blocks/signup_01.dart';
+export 'src/blocks/signup_02.dart';
+export 'src/blocks/signup_03.dart';
+export 'src/blocks/signup_04.dart';
+export 'src/blocks/signup_05.dart';
