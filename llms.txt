@@ -1,0 +1,28 @@
+# shadcn_jaspr
+
+> A Dart port of shadcn/ui for the Jaspr web framework. 60 components + 10 authentication blocks. Tailwind CSS v4 theming with light/dark mode.
+
+## Documentation
+
+- [README](https://github.com/AurelVU/shadcn_jaspr/blob/main/README.md): Getting started, component list, screenshots
+- [CHANGELOG](https://github.com/AurelVU/shadcn_jaspr/blob/main/CHANGELOG.md): Version history
+- [Live Demo](https://aurelvu.github.io/shadcn_jaspr/): Interactive component showcase
+- [pub.dev](https://pub.dev/packages/shadcn_jaspr): Package page
+
+## Source
+
+- [Barrel Export](https://github.com/AurelVU/shadcn_jaspr/blob/main/lib/shadcn_jaspr.dart): Single import for all components
+- [Components](https://github.com/AurelVU/shadcn_jaspr/tree/main/lib/src/components): 60 component files
+- [Blocks](https://github.com/AurelVU/shadcn_jaspr/tree/main/lib/src/blocks): 10 authentication page blocks
+- [Utilities](https://github.com/AurelVU/shadcn_jaspr/tree/main/lib/src/utils): cn() class merging + CVA variant management
+- [Theme CSS](https://github.com/AurelVU/shadcn_jaspr/blob/main/example/web/styles.tw.css): Tailwind CSS variables and theme config
+
+## Key Patterns
+
+- [Button (CVA pattern)](https://github.com/AurelVU/shadcn_jaspr/blob/main/lib/src/components/button.dart): Two-axis variant + size with CVA
+- [Card (Composable family)](https://github.com/AurelVU/shadcn_jaspr/blob/main/lib/src/components/card.dart): Container + Header/Title/Description/Content/Footer
+- [Dialog (InheritedComponent scope)](https://github.com/AurelVU/shadcn_jaspr/blob/main/lib/src/components/dialog.dart): Stateful root + private scope + child accessors
+
+## Full Reference
+
+- [llms-full.txt](https://github.com/AurelVU/shadcn_jaspr/blob/main/llms-full.txt): Complete API reference with setup, utilities, all component props, enums, and usage examples

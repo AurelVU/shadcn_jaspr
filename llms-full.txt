@@ -1,0 +1,1224 @@
+# shadcn_jaspr — Complete LLM Reference
+
+> A Dart port of shadcn/ui for the Jaspr web framework.
+> 60 components + 10 authentication blocks. Tailwind CSS v4. Light/dark mode.
+
+Version: 0.4.0 | Dart SDK: ^3.6.0 | Jaspr: ^0.22.0
+Repository: https://github.com/AurelVU/shadcn_jaspr
+Live demo: https://aurelvu.github.io/shadcn_jaspr/
+pub.dev: https://pub.dev/packages/shadcn_jaspr
+
+---
+
+## Overview
+
+shadcn_jaspr provides 60 UI components and 10 pre-built authentication page blocks for building web applications with the Jaspr framework. Components use Tailwind CSS classes and CSS variables for theming, matching the original shadcn/ui API patterns.
+
+Single import for all components:
+```dart
+import 'package:shadcn_jaspr/shadcn_jaspr.dart';
+```
+
+---
+
+## Setup
+
+### 1. pubspec.yaml
+```yaml
+dependencies:
+  jaspr: ^0.22.0
+  shadcn_jaspr: ^0.4.0
+```
+
+### 2. Tailwind CSS Configuration
+
+Create `web/styles.tw.css`:
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@source "../../lib/src/components/*.dart";
+@source "../../lib/src/blocks/*.dart";
+@source "../lib/**/*.dart";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.97 0.01 17);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.371 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.58 0.22 27);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body {
+    @apply bg-background text-foreground;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+}
+```
+
+Build Tailwind CSS:
+```bash
+cd example && npm install
+npx @tailwindcss/cli -i web/styles.tw.css -o web/styles.css
+```
+
+---
+
+## Utilities
+
+### cn() — Class Merging
+Merges CSS class names, filtering out null and empty values. Equivalent to `clsx` in JavaScript.
+
+```dart
+// Source: lib/src/utils/cn.dart
+String cn(List<String?> classes) =>
+    classes.where((c) => c != null && c.isNotEmpty).join(' ');
+
+// Usage:
+classes: cn(['base-classes', condition ? 'conditional-class' : null, className])
+```
+
+### CVA — Class Variance Authority
+Manages component variant classes. Dart equivalent of the `cva` npm package.
+
+```dart
+// Source: lib/src/utils/cva.dart
+
+/// Two-axis variants: variant + size
+class CVA<V extends Enum, S extends Enum> {
+  final String base;
+  final Map<V, String> variants;
+  final Map<S, String> sizes;
+  final V defaultVariant;
+  final S defaultSize;
+
+  const CVA({
+    required this.base,
+    required this.variants,
+    required this.sizes,
+    required this.defaultVariant,
+    required this.defaultSize,
+  });
+
+  String resolve({V? variant, S? size, String? className}) {
+    final v = variant ?? defaultVariant;
+    final s = size ?? defaultSize;
+    return cn([base, variants[v], sizes[s], className]);
+  }
+}
+
+/// Single-axis variants (no size)
+class CVASimple<V extends Enum> {
+  final String base;
+  final Map<V, String> variants;
+  final V defaultVariant;
+
+  const CVASimple({
+    required this.base,
+    required this.variants,
+    required this.defaultVariant,
+  });
+
+  String resolve({V? variant, String? className}) {
+    final v = variant ?? defaultVariant;
+    return cn([base, variants[v], className]);
+  }
+}
+```
+
+---
+
+## Core Patterns — Reference Implementations
+
+### Pattern 1: CVA Component (Button)
+
+```dart
+// Source: lib/src/components/button.dart
+import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
+
+import '../utils/cva.dart';
+
+enum ButtonVariant { defaultVariant, destructive, outline, secondary, ghost, link }
+
+enum ButtonSize { defaultSize, xs, sm, lg, icon, iconXs, iconSm, iconLg }
+
+final _buttonVariants = CVA<ButtonVariant, ButtonSize>(
+  base:
+      'inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+  variants: {
+    ButtonVariant.defaultVariant: 'bg-primary text-primary-foreground hover:bg-primary/90',
+    ButtonVariant.destructive:
+        'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40',
+    ButtonVariant.outline:
+        'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
+    ButtonVariant.secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+    ButtonVariant.ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+    ButtonVariant.link: 'text-primary underline-offset-4 hover:underline',
+  },
+  sizes: {
+    ButtonSize.defaultSize: 'h-9 px-4 py-2 has-[>svg]:px-3',
+    ButtonSize.xs:
+        'h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*=\'size-\'])]:size-3',
+    ButtonSize.sm: 'h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5',
+    ButtonSize.lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+    ButtonSize.icon: 'size-9',
+    ButtonSize.iconXs: 'size-6 rounded-md [&_svg:not([class*=\'size-\'])]:size-3',
+    ButtonSize.iconSm: 'size-8',
+    ButtonSize.iconLg: 'size-10',
+  },
+  defaultVariant: ButtonVariant.defaultVariant,
+  defaultSize: ButtonSize.defaultSize,
+);
+
+class ShadButton extends StatelessComponent {
+  final List<Component> children;
+  final ButtonVariant? variant;
+  final ButtonSize? size;
+  final bool isDisabled;
+  final VoidCallback? onPressed;
+  final String? className;
+
+  const ShadButton(
+    this.children, {
+    this.variant,
+    this.size,
+    this.isDisabled = false,
+    this.onPressed,
+    this.className,
+    super.key,
+  });
+
+  @override
+  Component build(BuildContext context) {
+    return button(
+      children,
+      disabled: isDisabled,
+      onClick: onPressed,
+      classes: _buttonVariants.resolve(variant: variant, size: size, className: className),
+      attributes: {
+        'data-slot': 'button',
+        'data-variant': (variant ?? ButtonVariant.defaultVariant).name,
+        'data-size': (size ?? ButtonSize.defaultSize).name,
+      },
+    );
+  }
+}
+```
+
+### Pattern 2: Composable Family (Card)
+
+```dart
+// Source: lib/src/components/card.dart
+import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
+
+import '../utils/cn.dart';
+
+class ShadCard extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+
+  const ShadCard(this.children, {this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      children,
+      classes: cn([
+        'flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm',
+        className,
+      ]),
+      attributes: {'data-slot': 'card'},
+    );
+  }
+}
+
+class ShadCardHeader extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+
+  const ShadCardHeader(this.children, {this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      children,
+      classes: cn([
+        '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+        className,
+      ]),
+      attributes: {'data-slot': 'card-header'},
+    );
+  }
+}
+
+class ShadCardTitle extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+
+  const ShadCardTitle(this.children, {this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      children,
+      classes: cn(['leading-none font-semibold', className]),
+      attributes: {'data-slot': 'card-title'},
+    );
+  }
+}
+
+class ShadCardDescription extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+
+  const ShadCardDescription(this.children, {this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      children,
+      classes: cn(['text-sm text-muted-foreground', className]),
+      attributes: {'data-slot': 'card-description'},
+    );
+  }
+}
+
+class ShadCardContent extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+
+  const ShadCardContent(this.children, {this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      children,
+      classes: cn(['px-6', className]),
+      attributes: {'data-slot': 'card-content'},
+    );
+  }
+}
+
+class ShadCardFooter extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+
+  const ShadCardFooter(this.children, {this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      children,
+      classes: cn(['flex items-center px-6 [.border-t]:pt-6', className]),
+      attributes: {'data-slot': 'card-footer'},
+    );
+  }
+}
+```
+
+### Pattern 3: InheritedComponent Scope (Dialog)
+
+```dart
+// Source: lib/src/components/dialog.dart
+import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/dom.dart';
+
+import '../utils/cn.dart';
+
+class ShadDialog extends StatefulComponent {
+  final bool? open;
+  final ValueChanged<bool>? onOpenChange;
+  final List<Component> children;
+
+  const ShadDialog({
+    this.open,
+    this.onOpenChange,
+    required this.children,
+    super.key,
+  });
+
+  @override
+  State<ShadDialog> createState() => _ShadDialogState();
+}
+
+class _ShadDialogState extends State<ShadDialog> {
+  late bool _isOpen;
+
+  @override
+  void initState() {
+    super.initState();
+    _isOpen = component.open ?? false;
+  }
+
+  void _setOpen(bool value) {
+    setState(() { _isOpen = value; });
+    component.onOpenChange?.call(value);
+  }
+
+  @override
+  Component build(BuildContext context) {
+    return _ShadDialogScope(
+      isOpen: _isOpen,
+      onOpenChange: _setOpen,
+      child: div(component.children),
+    );
+  }
+}
+
+class _ShadDialogScope extends InheritedComponent {
+  final bool isOpen;
+  final ValueChanged<bool> onOpenChange;
+
+  const _ShadDialogScope({
+    required this.isOpen,
+    required this.onOpenChange,
+    required super.child,
+  });
+
+  static _ShadDialogScope of(BuildContext context) {
+    return context.dependOnInheritedComponentOfExactType<_ShadDialogScope>()!;
+  }
+
+  @override
+  bool updateShouldNotify(covariant _ShadDialogScope oldComponent) {
+    return isOpen != oldComponent.isOpen;
+  }
+}
+
+class ShadDialogTrigger extends StatelessComponent {
+  final List<Component> children;
+  const ShadDialogTrigger(this.children, {super.key});
+
+  @override
+  Component build(BuildContext context) {
+    final scope = _ShadDialogScope.of(context);
+    return div(
+      children,
+      events: {'click': (_) => scope.onOpenChange(true)},
+      attributes: {'data-slot': 'dialog-trigger'},
+    );
+  }
+}
+
+class ShadDialogContent extends StatelessComponent {
+  final List<Component> children;
+  final bool showCloseButton;
+  final String? className;
+
+  const ShadDialogContent(this.children, {this.showCloseButton = true, this.className, super.key});
+
+  @override
+  Component build(BuildContext context) {
+    final scope = _ShadDialogScope.of(context);
+    if (!scope.isOpen) return Component.fragment([]);
+    return Component.fragment([
+      // Overlay
+      div([], classes: 'fixed inset-0 z-50 bg-black/50 animate-in fade-in-0',
+        attributes: {'data-slot': 'dialog-overlay', 'data-state': 'open'},
+        events: {'click': (_) => scope.onOpenChange(false)},
+      ),
+      // Content panel
+      div(
+        [...children, if (showCloseButton) /* close button SVG */ ],
+        classes: cn([
+          'fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 outline-none animate-in fade-in-0 zoom-in-95 sm:max-w-lg',
+          className,
+        ]),
+        attributes: {'data-slot': 'dialog-content', 'data-state': 'open', 'role': 'dialog', 'aria-modal': 'true'},
+      ),
+    ]);
+  }
+}
+
+class ShadDialogHeader extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+  const ShadDialogHeader(this.children, {this.className, super.key});
+  @override
+  Component build(BuildContext context) => div(children,
+    classes: cn(['flex flex-col gap-2 text-center sm:text-left', className]),
+    attributes: {'data-slot': 'dialog-header'});
+}
+
+class ShadDialogFooter extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+  const ShadDialogFooter(this.children, {this.className, super.key});
+  @override
+  Component build(BuildContext context) => div(children,
+    classes: cn(['flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className]),
+    attributes: {'data-slot': 'dialog-footer'});
+}
+
+class ShadDialogTitle extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+  const ShadDialogTitle(this.children, {this.className, super.key});
+  @override
+  Component build(BuildContext context) => div(children,
+    classes: cn(['text-lg leading-none font-semibold', className]),
+    attributes: {'data-slot': 'dialog-title'});
+}
+
+class ShadDialogDescription extends StatelessComponent {
+  final List<Component> children;
+  final String? className;
+  const ShadDialogDescription(this.children, {this.className, super.key});
+  @override
+  Component build(BuildContext context) => div(children,
+    classes: cn(['text-sm text-muted-foreground', className]),
+    attributes: {'data-slot': 'dialog-description'});
+}
+
+class ShadDialogClose extends StatelessComponent {
+  final List<Component> children;
+  const ShadDialogClose(this.children, {super.key});
+  @override
+  Component build(BuildContext context) {
+    final scope = _ShadDialogScope.of(context);
+    return div(children,
+      events: {'click': (_) => scope.onOpenChange(false)},
+      attributes: {'data-slot': 'dialog-close'});
+  }
+}
+```
+
+---
+
+## Component Reference
+
+### Base Components
+
+#### Button
+- **File:** `lib/src/components/button.dart`
+- **Category:** A (stateless)
+- **Styling:** `CVA<ButtonVariant, ButtonSize>`
+- **Enums:** `ButtonVariant` {defaultVariant, destructive, outline, secondary, ghost, link} · `ButtonSize` {defaultSize, xs, sm, lg, icon, iconXs, iconSm, iconLg}
+- **Classes:** `ShadButton(List<Component> children, {ButtonVariant? variant, ButtonSize? size, bool isDisabled = false, VoidCallback? onPressed, String? className})`
+- **Usage:**
+```dart
+ShadButton([Component.text('Click me')], variant: ButtonVariant.outline, onPressed: () {})
+ShadButton([Component.text('Delete')], variant: ButtonVariant.destructive, size: ButtonSize.sm)
+ShadButton([icon], size: ButtonSize.icon)  // icon-only button
+```
+
+#### Badge
+- **File:** `lib/src/components/badge.dart`
+- **Category:** A (stateless)
+- **Styling:** `CVASimple<BadgeVariant>`
+- **Enums:** `BadgeVariant` {defaultVariant, secondary, destructive, outline, ghost, link}
+- **Classes:** `ShadBadge(List<Component> children, {BadgeVariant? variant, String? className})`
+- **Usage:**
+```dart
+ShadBadge([Component.text('New')])
+ShadBadge([Component.text('Error')], variant: BadgeVariant.destructive)
+```
+
+#### Card
+- **File:** `lib/src/components/card.dart`
+- **Category:** A (stateless, composable family)
+- **Styling:** `cn()` only
+- **Classes:** `ShadCard`, `ShadCardHeader`, `ShadCardTitle`, `ShadCardDescription`, `ShadCardContent`, `ShadCardFooter` — all accept `(List<Component> children, {String? className})`
+- **Usage:**
+```dart
+ShadCard([
+  ShadCardHeader([
+    ShadCardTitle([Component.text('Title')]),
+    ShadCardDescription([Component.text('Description')]),
+  ]),
+  ShadCardContent([Component.text('Content here')]),
+  ShadCardFooter([ShadButton([Component.text('Save')])]),
+])
+```
+
+#### Input
+- **File:** `lib/src/components/input.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadInput({InputType? type, String? placeholder, String? value, bool isDisabled = false, ValueChanged<dynamic>? onInput, ValueChanged<dynamic>? onChange, String? className, String? id, String? name})`
+- **Usage:**
+```dart
+ShadInput(placeholder: 'Enter email', type: InputType.email, onInput: (v) {})
+```
+
+#### Label
+- **File:** `lib/src/components/label.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadLabel(List<Component> children, {String? htmlFor, String? className})`
+- **Usage:**
+```dart
+ShadLabel([Component.text('Email')], htmlFor: 'email-input')
+```
+
+#### Separator
+- **File:** `lib/src/components/separator.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Enums:** `SeparatorOrientation` {horizontal, vertical}
+- **Classes:** `ShadSeparator({SeparatorOrientation orientation = SeparatorOrientation.horizontal, bool decorative = true, String? className})`
+
+### Form Components
+
+#### Checkbox
+- **File:** `lib/src/components/checkbox.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Classes:** `ShadCheckbox({bool? checked, ValueChanged<bool>? onCheckedChange, bool isDisabled = false, String? className})`
+- **Usage:**
+```dart
+ShadCheckbox(checked: true, onCheckedChange: (v) => print(v))
+```
+
+#### Switch
+- **File:** `lib/src/components/switch_component.dart` (not `switch.dart` — Dart keyword)
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Enums:** `SwitchSize` {defaultSize, sm}
+- **Classes:** `ShadSwitch({bool? checked, ValueChanged<bool>? onCheckedChange, bool isDisabled = false, SwitchSize size = SwitchSize.defaultSize, String? className})`
+
+#### Textarea
+- **File:** `lib/src/components/textarea.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadTextarea({String? value, String? placeholder, bool isDisabled = false, int? rows, ValueChanged<String>? onInput, ValueChanged<String>? onChange, String? className, String? id, String? name})`
+
+#### Select
+- **File:** `lib/src/components/select.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadSelect({String? value, ValueChanged<String>? onValueChange, required List<Component> children})`, `ShadSelectTrigger(List<Component> children, {String? className, String? placeholder})`, `ShadSelectValue({String? placeholder})`, `ShadSelectContent(List<Component> children, {String? className})`, `ShadSelectItem({required String value, required List<Component> children, String? className})`, `ShadSelectSeparator({String? className})`
+- **Usage:**
+```dart
+ShadSelect(
+  value: selected,
+  onValueChange: (v) => setState(() => selected = v),
+  children: [
+    ShadSelectTrigger([ShadSelectValue(placeholder: 'Pick one')]),
+    ShadSelectContent([
+      ShadSelectItem(value: 'a', children: [Component.text('Option A')]),
+      ShadSelectItem(value: 'b', children: [Component.text('Option B')]),
+    ]),
+  ],
+)
+```
+
+#### RadioGroup
+- **File:** `lib/src/components/radio_group.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadRadioGroup({String? value, ValueChanged<String>? onValueChange, required List<Component> children, String? className})`, `ShadRadioGroupItem({required String value, bool isDisabled = false, String? className})`
+- **Usage:**
+```dart
+ShadRadioGroup(
+  value: 'a',
+  onValueChange: (v) {},
+  children: [
+    ShadRadioGroupItem(value: 'a'),
+    ShadRadioGroupItem(value: 'b'),
+  ],
+)
+```
+
+#### Form
+- **File:** `lib/src/components/form.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadForm({Map<String, String>? errors, void Function(Map<String, String> values)? onSubmit, required List<Component> children, String? className})`, `ShadFormField({required String name, required List<Component> children})`, `ShadFormItem`, `ShadFormLabel`, `ShadFormControl`, `ShadFormDescription`, `ShadFormMessage`
+
+### Navigation Components
+
+#### Tabs
+- **File:** `lib/src/components/tabs.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `CVASimple<TabsListVariant>`
+- **Enums:** `TabsListVariant` {defaultVariant, line}
+- **Classes:** `ShadTabs({required String defaultValue, String? value, ValueChanged<String>? onValueChange, required List<Component> children, String? className})`, `ShadTabsList(List<Component> children, {TabsListVariant? variant, String? className})`, `ShadTabsTrigger({required String value, required List<Component> children, bool isDisabled = false, String? className})`, `ShadTabsContent({required String value, required List<Component> children, String? className})`
+- **Usage:**
+```dart
+ShadTabs(
+  defaultValue: 'tab1',
+  children: [
+    ShadTabsList([
+      ShadTabsTrigger(value: 'tab1', children: [Component.text('Tab 1')]),
+      ShadTabsTrigger(value: 'tab2', children: [Component.text('Tab 2')]),
+    ]),
+    ShadTabsContent(value: 'tab1', children: [Component.text('Content 1')]),
+    ShadTabsContent(value: 'tab2', children: [Component.text('Content 2')]),
+  ],
+)
+```
+
+#### Breadcrumb
+- **File:** `lib/src/components/breadcrumb.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadBreadcrumb`, `ShadBreadcrumbList`, `ShadBreadcrumbItem`, `ShadBreadcrumbLink(List<Component> children, {String? href, String? className})`, `ShadBreadcrumbPage`, `ShadBreadcrumbSeparator`, `ShadBreadcrumbEllipsis`
+
+#### Pagination
+- **File:** `lib/src/components/pagination.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadPagination`, `ShadPaginationContent`, `ShadPaginationItem`, `ShadPaginationLink(List<Component> children, {bool isActive = false, VoidCallback? onPressed, String? className})`, `ShadPaginationPrevious`, `ShadPaginationNext`, `ShadPaginationEllipsis`
+
+#### NavigationMenu
+- **File:** `lib/src/components/navigation_menu.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadNavigationMenu`, `ShadNavigationMenuList`, `ShadNavigationMenuItem({required String value, ...})`, `ShadNavigationMenuTrigger`, `ShadNavigationMenuContent`, `ShadNavigationMenuLink({required String href, ...})`, `ShadNavigationMenuIndicator`
+
+### Overlay Components
+
+#### Dialog
+- **File:** `lib/src/components/dialog.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadDialog({bool? open, ValueChanged<bool>? onOpenChange, required List<Component> children})`, `ShadDialogTrigger`, `ShadDialogContent(List<Component> children, {bool showCloseButton = true, String? className})`, `ShadDialogHeader`, `ShadDialogFooter`, `ShadDialogTitle`, `ShadDialogDescription`, `ShadDialogClose`
+- **Usage:**
+```dart
+ShadDialog(
+  children: [
+    ShadDialogTrigger([ShadButton([Component.text('Open')])]),
+    ShadDialogContent([
+      ShadDialogHeader([
+        ShadDialogTitle([Component.text('Title')]),
+        ShadDialogDescription([Component.text('Description')]),
+      ]),
+      ShadDialogFooter([ShadButton([Component.text('OK')])]),
+    ]),
+  ],
+)
+```
+
+#### AlertDialog
+- **File:** `lib/src/components/alert_dialog.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadAlertDialog`, `ShadAlertDialogTrigger`, `ShadAlertDialogContent`, `ShadAlertDialogHeader`, `ShadAlertDialogFooter`, `ShadAlertDialogTitle`, `ShadAlertDialogDescription`, `ShadAlertDialogAction(List<Component> children, {VoidCallback? onAction})`, `ShadAlertDialogCancel`
+
+#### Sheet
+- **File:** `lib/src/components/sheet.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `SheetSide` {top, right, bottom, left}
+- **Classes:** `ShadSheet`, `ShadSheetTrigger`, `ShadSheetContent(List<Component> children, {SheetSide side = SheetSide.right, bool showCloseButton = true, String? className})`, `ShadSheetHeader`, `ShadSheetFooter`, `ShadSheetTitle`, `ShadSheetDescription`, `ShadSheetClose`
+
+#### Drawer
+- **File:** `lib/src/components/drawer.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `DrawerDirection` {top, right, bottom, left}
+- **Classes:** `ShadDrawer`, `ShadDrawerTrigger`, `ShadDrawerContent(List<Component> children, {DrawerDirection direction = DrawerDirection.bottom, bool showHandle = true, String? className})`, `ShadDrawerHeader`, `ShadDrawerFooter`, `ShadDrawerTitle`, `ShadDrawerDescription`, `ShadDrawerClose`
+
+#### DropdownMenu
+- **File:** `lib/src/components/dropdown_menu.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `DropdownMenuItemVariant` {defaultVariant, destructive}
+- **Classes:** `ShadDropdownMenu`, `ShadDropdownMenuTrigger`, `ShadDropdownMenuContent`, `ShadDropdownMenuItem(List<Component> children, {VoidCallback? onSelect, bool isDisabled = false, bool inset = false, DropdownMenuItemVariant variant, String? className})`, `ShadDropdownMenuSeparator`, `ShadDropdownMenuLabel`
+
+#### ContextMenu
+- **File:** `lib/src/components/context_menu.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `ContextMenuItemVariant` {defaultVariant, destructive}
+- **Classes:** `ShadContextMenu`, `ShadContextMenuTrigger`, `ShadContextMenuContent`, `ShadContextMenuItem`, `ShadContextMenuSeparator`, `ShadContextMenuLabel`, `ShadContextMenuCheckboxItem(List<Component> children, {bool checked = false, VoidCallback? onSelect, String? className})`, `ShadContextMenuRadioGroup({String? value, required List<Component> children})`, `ShadContextMenuRadioItem({required String value, ...})`, `ShadContextMenuShortcut`
+
+#### Tooltip
+- **File:** `lib/src/components/tooltip.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `TooltipSide` {top, right, bottom, left}
+- **Classes:** `ShadTooltip({required List<Component> children, int delayMs = 200})`, `ShadTooltipTrigger`, `ShadTooltipContent(List<Component> children, {TooltipSide side = TooltipSide.top, String? className})`
+
+#### Popover
+- **File:** `lib/src/components/popover.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `PopoverSide` {top, right, bottom, left}
+- **Classes:** `ShadPopover({bool? open, ValueChanged<bool>? onOpenChange, required List<Component> children})`, `ShadPopoverTrigger`, `ShadPopoverContent(List<Component> children, {PopoverSide side = PopoverSide.bottom, String? className})`
+
+#### HoverCard
+- **File:** `lib/src/components/hover_card.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadHoverCard({required List<Component> children, int openDelay = 200, int closeDelay = 200})`, `ShadHoverCardTrigger`, `ShadHoverCardContent`
+
+### Data Display Components
+
+#### Table
+- **File:** `lib/src/components/table.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadTable`, `ShadTableHeader`, `ShadTableBody`, `ShadTableFooter`, `ShadTableRow`, `ShadTableHead`, `ShadTableCell`, `ShadTableCaption` — all accept `(List<Component> children, {String? className})`
+
+#### DataTable
+- **File:** `lib/src/components/data_table.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Enums:** `SortDirection` {asc, desc}
+- **Helper classes:** `DataTableColumn<T>({required String id, required String header, required List<Component> Function(T row) cell, bool sortable = false})`
+- **Classes:** `ShadDataTable<T>({required List<T> data, required List<DataTableColumn<T>> columns, bool selectable = false, ValueChanged<List<T>>? onSelectionChange, int? pageSize, String? className})`
+
+#### Avatar
+- **File:** `lib/src/components/avatar.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadAvatar(List<Component> children, {String? className})`, `ShadAvatarImage({required String src, String? alt, String? className})`, `ShadAvatarFallback(List<Component> children, {String? className})`
+
+#### Skeleton
+- **File:** `lib/src/components/skeleton.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadSkeleton({String? className})`
+- **Usage:**
+```dart
+ShadSkeleton(className: 'h-4 w-[250px]')
+```
+
+#### Progress
+- **File:** `lib/src/components/progress.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadProgress({required double value, String? className})`
+
+#### AspectRatio
+- **File:** `lib/src/components/aspect_ratio.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadAspectRatio({required double ratio, required List<Component> children, String? className})`
+
+#### ScrollArea
+- **File:** `lib/src/components/scroll_area.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Enums:** `ScrollAreaOrientation` {vertical, horizontal}
+- **Classes:** `ShadScrollArea(List<Component> children, {String? className})`, `ShadScrollBar({ScrollAreaOrientation orientation, String? className})`
+
+### Interactive Components
+
+#### Toggle
+- **File:** `lib/src/components/toggle.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `CVA<ToggleVariant, ToggleSize>`
+- **Enums:** `ToggleVariant` {defaultVariant, outline} · `ToggleSize` {defaultSize, sm, lg}
+- **Classes:** `ShadToggle({bool? pressed, ValueChanged<bool>? onPressedChange, ToggleVariant? variant, ToggleSize? size, bool isDisabled = false, required List<Component> children, String? className})`
+
+#### ToggleGroup
+- **File:** `lib/src/components/toggle_group.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `CVA<ToggleGroupVariant, ToggleGroupSize>`
+- **Enums:** `ToggleGroupType` {single, multiple} · `ToggleGroupVariant` {defaultVariant, outline} · `ToggleGroupSize` {defaultSize, sm, lg}
+- **Classes:** `ShadToggleGroup({ToggleGroupType type, List<String>? value, ValueChanged<List<String>>? onValueChange, ToggleGroupVariant? variant, ToggleGroupSize? size, required List<Component> children, String? className})`, `ShadToggleGroupItem({required String value, required List<Component> children, bool isDisabled = false, String? className})`
+
+#### Accordion
+- **File:** `lib/src/components/accordion.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `AccordionType` {single, multiple}
+- **Classes:** `ShadAccordion({AccordionType type, List<String>? value, String? defaultValue, ValueChanged<List<String>>? onValueChange, required List<Component> children, String? className})`, `ShadAccordionItem({required String value, required List<Component> children, String? className})`, `ShadAccordionTrigger`, `ShadAccordionContent`
+
+#### Collapsible
+- **File:** `lib/src/components/collapsible.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadCollapsible({bool? open, ValueChanged<bool>? onOpenChange, required List<Component> children, String? className})`, `ShadCollapsibleTrigger`, `ShadCollapsibleContent`
+
+#### Slider
+- **File:** `lib/src/components/slider.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Classes:** `ShadSlider({double? value, double min = 0, double max = 100, double step = 1, ValueChanged<double>? onValueChange, bool isDisabled = false, String? className})`
+
+#### Calendar
+- **File:** `lib/src/components/calendar.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Classes:** `ShadCalendar({DateTime? selected, ValueChanged<DateTime>? onSelect, DateTime? initialMonth, String? className})`
+
+#### DatePicker
+- **File:** `lib/src/components/date_picker.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Classes:** `ShadDatePicker({DateTime? selected, ValueChanged<DateTime>? onSelect, String? placeholder, String? className})`
+
+#### Carousel
+- **File:** `lib/src/components/carousel.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `CarouselOrientation` {horizontal, vertical}
+- **Classes:** `ShadCarousel({int? index, ValueChanged<int>? onIndexChange, CarouselOrientation orientation, required List<Component> children, String? className})`, `ShadCarouselContent`, `ShadCarouselItem`, `ShadCarouselPrevious`, `ShadCarouselNext`
+
+#### Resizable
+- **File:** `lib/src/components/resizable.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `ResizableDirection` {horizontal, vertical}
+- **Classes:** `ShadResizablePanelGroup({ResizableDirection direction, required List<Component> children, String? className})`, `ShadResizablePanel({required int defaultSize, int? minSize, int? maxSize, required List<Component> children, String? className})`, `ShadResizableHandle({bool withHandle = false, String? className})`
+
+### Feedback Components
+
+#### Alert
+- **File:** `lib/src/components/alert.dart`
+- **Category:** A (stateless)
+- **Styling:** `CVASimple<AlertVariant>`
+- **Enums:** `AlertVariant` {defaultVariant, destructive}
+- **Classes:** `ShadAlert(List<Component> children, {AlertVariant? variant, String? className})`, `ShadAlertTitle`, `ShadAlertDescription`
+
+#### Toast
+- **File:** `lib/src/components/toast.dart`
+- **Category:** A (stateless) / B (ShadToaster)
+- **Styling:** `CVASimple<ToastVariant>`
+- **Enums:** `ToastVariant` {defaultVariant, destructive}
+- **Classes:** `ShadToaster({required List<Component> children, String? className})`, `ShadToast(List<Component> children, {ToastVariant? variant, VoidCallback? onClose, String? className})`, `ShadToastTitle`, `ShadToastDescription`, `ShadToastAction(List<Component> children, {VoidCallback? onAction, String? className})`, `ShadToastClose`
+
+#### Sonner
+- **File:** `lib/src/components/sonner.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadSonner({required List<Component> children, String? className})`, `ShadSonnerToast(List<Component> children, {VoidCallback? onClose, String? className})`
+
+### Command & Search
+
+#### Command
+- **File:** `lib/src/components/command.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadCommand`, `ShadCommandInput({String? placeholder, String? className})`, `ShadCommandList`, `ShadCommandEmpty`, `ShadCommandGroup(List<Component> children, {String? heading, String? className})`, `ShadCommandItem({required String value, required List<Component> children, VoidCallback? onSelect, bool isDisabled = false, String? className, List<String>? keywords})`, `ShadCommandSeparator`, `ShadCommandShortcut`
+
+#### Combobox
+- **File:** `lib/src/components/combobox.dart`
+- **Category:** B (stateful self-managed)
+- **Styling:** `cn()` only
+- **Helper classes:** `ComboboxOption({required String value, required String label})`
+- **Classes:** `ShadCombobox({String? value, ValueChanged<String>? onValueChange, required List<ComboboxOption> options, String? placeholder, String? searchPlaceholder, String? emptyText, String? className})`
+
+### Menu Components
+
+#### Menubar
+- **File:** `lib/src/components/menubar.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `MenubarItemVariant` {defaultVariant, destructive}
+- **Classes:** `ShadMenubar`, `ShadMenubarMenu({required String value, required List<Component> children})`, `ShadMenubarTrigger`, `ShadMenubarContent`, `ShadMenubarItem`, `ShadMenubarSeparator`, `ShadMenubarLabel`, `ShadMenubarCheckboxItem`, `ShadMenubarShortcut`
+
+### Input Components
+
+#### InputOTP
+- **File:** `lib/src/components/input_otp.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Classes:** `ShadInputOTP({required int maxLength, String? value, ValueChanged<String>? onValueChange, required List<Component> children, String? className})`, `ShadInputOTPGroup`, `ShadInputOTPSlot({required int index, String? className})`, `ShadInputOTPSeparator`
+
+#### InputGroup
+- **File:** `lib/src/components/input_group.dart`
+- **Category:** A (stateless)
+- **Styling:** `CVASimple<InputGroupAddonAlign>`
+- **Enums:** `InputGroupAddonAlign` {left, right, top, bottom}
+- **Classes:** `ShadInputGroup`, `ShadInputGroupAddon(List<Component> children, {InputGroupAddonAlign? align, String? className})`, `ShadInputGroupButton`, `ShadInputGroupInput`, `ShadInputGroupTextarea`, `ShadInputGroupText`
+
+#### NativeSelect
+- **File:** `lib/src/components/native_select.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadNativeSelect({required List<Component> children, String? value, bool isDisabled = false, ValueChanged<dynamic>? onChange, String? className, String? id, String? name})`, `ShadNativeSelectOption({required String value, required List<Component> children, bool isDisabled = false})`, `ShadNativeSelectOptGroup({required String label, required List<Component> children, bool isDisabled = false})`
+
+### Layout Components
+
+#### Sidebar
+- **File:** `lib/src/components/sidebar.dart`
+- **Category:** C (stateful + scope)
+- **Styling:** `cn()` only
+- **Enums:** `SidebarSide` {left, right} · `SidebarVariant` {sidebar, floating, inset} · `SidebarCollapsible` {offcanvas, icon, none}
+- **Classes:** `ShadSidebarProvider`, `ShadSidebar({SidebarSide side, SidebarVariant variant, SidebarCollapsible collapsible, required List<Component> children, String? className})`, `ShadSidebarHeader`, `ShadSidebarFooter`, `ShadSidebarContent`, `ShadSidebarGroup`, `ShadSidebarGroupLabel`, `ShadSidebarGroupContent`, `ShadSidebarMenu`, `ShadSidebarMenuItem`, `ShadSidebarMenuButton({bool isActive, VoidCallback? onPressed, String? tooltip, ...})`, `ShadSidebarMenuAction`, `ShadSidebarMenuSub`, `ShadSidebarMenuSubItem`, `ShadSidebarMenuSubButton({String? href, bool isActive, ...})`, `ShadSidebarSeparator`, `ShadSidebarTrigger`, `ShadSidebarInset`, `ShadSidebarRail`
+
+### Typography & Display
+
+#### Typography
+- **File:** `lib/src/components/typography.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadTypographyH1`, `ShadTypographyH2`, `ShadTypographyH3`, `ShadTypographyH4`, `ShadTypographyP`, `ShadTypographyBlockquote`, `ShadTypographyList`, `ShadTypographyCode`, `ShadTypographyLead`, `ShadTypographyLarge`, `ShadTypographySmall`, `ShadTypographyMuted` — all accept `(List<Component> children, {String? className})`
+
+#### Kbd
+- **File:** `lib/src/components/kbd.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadKbd(List<Component> children, {String? className})`, `ShadKbdGroup(List<Component> children, {String? className})`
+
+#### Spinner
+- **File:** `lib/src/components/spinner.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Classes:** `ShadSpinner({String? className})`
+
+#### Empty
+- **File:** `lib/src/components/empty.dart`
+- **Category:** A (stateless, composable family)
+- **Styling:** `CVASimple<EmptyMediaVariant>`
+- **Enums:** `EmptyMediaVariant` {defaultVariant, icon}
+- **Classes:** `ShadEmpty`, `ShadEmptyHeader`, `ShadEmptyMedia(List<Component> children, {EmptyMediaVariant? variant, String? className})`, `ShadEmptyTitle`, `ShadEmptyDescription`, `ShadEmptyContent`
+
+#### Item
+- **File:** `lib/src/components/item.dart`
+- **Category:** A (stateless, composable family)
+- **Styling:** `CVA<ItemVariant, ItemSize>` + `CVASimple<ItemMediaVariant>`
+- **Enums:** `ItemVariant` {defaultVariant, outline, muted} · `ItemSize` {defaultSize, sm} · `ItemMediaVariant` {defaultVariant, icon, image}
+- **Classes:** `ShadItem(List<Component> children, {ItemVariant? variant, ItemSize? size, String? className})`, `ShadItemMedia`, `ShadItemContent`, `ShadItemTitle`, `ShadItemDescription`, `ShadItemActions`, `ShadItemHeader`, `ShadItemFooter`, `ShadItemGroup`, `ShadItemSeparator`
+
+#### ButtonGroup
+- **File:** `lib/src/components/button_group.dart`
+- **Category:** A (stateless)
+- **Styling:** `CVASimple<ButtonGroupVariant>`
+- **Enums:** `ButtonGroupVariant` {horizontal, vertical}
+- **Classes:** `ShadButtonGroup(List<Component> children, {ButtonGroupVariant? variant, String? className})`, `ShadButtonGroupText`, `ShadButtonGroupSeparator`
+
+#### Field
+- **File:** `lib/src/components/field.dart`
+- **Category:** A (stateless, composable family)
+- **Styling:** `CVASimple<FieldLegendVariant>` + `CVASimple<FieldVariant>`
+- **Enums:** `FieldLegendVariant` {legend, label} · `FieldVariant` {vertical, horizontal}
+- **Classes:** `ShadFieldSet(List<Component> children, {bool isDisabled = false, String? className})`, `ShadFieldLegend(List<Component> children, {FieldLegendVariant? variant, String? className})`, `ShadFieldGroup`, `ShadField(List<Component> children, {FieldVariant? variant, String? className})`, `ShadFieldLabel({String? htmlFor, ...})`, `ShadFieldContent`, `ShadFieldTitle`, `ShadFieldDescription`, `ShadFieldError(List<String> errors, {String? className})`, `ShadFieldSeparator`
+
+### Charts
+
+#### Chart
+- **File:** `lib/src/components/chart.dart`
+- **Category:** A (stateless)
+- **Styling:** `cn()` only
+- **Helper classes:** `ChartConfigEntry({required String label, String? color, String? icon})`, `ChartConfig(Map<String, ChartConfigEntry> entries)`
+- **Classes:**
+  - `ShadChartContainer({required ChartConfig config, required List<Component> children, String? className})`
+  - `ShadBarChart({required List<Map<String, num>> data, required List<String> dataKeys, String? categoryKey, double width = 600, double height = 300, String? className})`
+  - `ShadLineChart({required List<Map<String, num>> data, required List<String> dataKeys, double width = 600, double height = 300, String? className})`
+  - `ShadAreaChart({required List<Map<String, num>> data, required List<String> dataKeys, double width = 600, double height = 300, double fillOpacity = 0.3, String? className})`
+  - `ShadPieChart({required List<Map<String, num>> data, required List<String> dataKeys, double width = 300, double height = 300, double innerRadius = 0, String? className})`
+  - `ShadRadarChart({required List<Map<String, dynamic>> data, required List<String> dataKeys, String categoryKey = 'category', double width = 400, double height = 400, int gridLevels = 5, String? className})`
+  - `ShadRadialChart({required List<Map<String, num>> data, required List<String> dataKeys, double width = 300, double height = 300, double maxValue = 100, String? className})`
+  - `ShadChartTooltip`, `ShadChartTooltipContent`, `ShadChartLegend`, `ShadChartLegendContent({required ChartConfig config, String? className})`
+
+### Miscellaneous
+
+#### Direction
+- **File:** `lib/src/components/direction.dart`
+- **Category:** A (stateless, provides scope)
+- **Enums:** `DirectionValue` {ltr, rtl}
+- **Classes:** `ShadDirectionProvider({required DirectionValue direction, required List<Component> children})`
+
+---
+
+## Enum Reference
+
+| Enum | Values | Used by |
+|------|--------|---------|
+| `AccordionType` | single, multiple | ShadAccordion |
+| `AlertVariant` | defaultVariant, destructive | ShadAlert |
+| `BadgeVariant` | defaultVariant, secondary, destructive, outline, ghost, link | ShadBadge |
+| `ButtonGroupVariant` | horizontal, vertical | ShadButtonGroup |
+| `ButtonSize` | defaultSize, xs, sm, lg, icon, iconXs, iconSm, iconLg | ShadButton |
+| `ButtonVariant` | defaultVariant, destructive, outline, secondary, ghost, link | ShadButton |
+| `CarouselOrientation` | horizontal, vertical | ShadCarousel |
+| `ContextMenuItemVariant` | defaultVariant, destructive | ShadContextMenuItem |
+| `DirectionValue` | ltr, rtl | ShadDirectionProvider |
+| `DrawerDirection` | top, right, bottom, left | ShadDrawerContent |
+| `DropdownMenuItemVariant` | defaultVariant, destructive | ShadDropdownMenuItem |
+| `EmptyMediaVariant` | defaultVariant, icon | ShadEmptyMedia |
+| `FieldLegendVariant` | legend, label | ShadFieldLegend |
+| `FieldVariant` | vertical, horizontal | ShadField |
+| `InputGroupAddonAlign` | left, right, top, bottom | ShadInputGroupAddon |
+| `ItemMediaVariant` | defaultVariant, icon, image | ShadItemMedia |
+| `ItemSize` | defaultSize, sm | ShadItem |
+| `ItemVariant` | defaultVariant, outline, muted | ShadItem |
+| `MenubarItemVariant` | defaultVariant, destructive | ShadMenubarItem |
+| `PopoverSide` | top, right, bottom, left | ShadPopoverContent |
+| `ResizableDirection` | horizontal, vertical | ShadResizablePanelGroup |
+| `ScrollAreaOrientation` | vertical, horizontal | ShadScrollBar |
+| `SeparatorOrientation` | horizontal, vertical | ShadSeparator |
+| `SheetSide` | top, right, bottom, left | ShadSheetContent |
+| `SidebarCollapsible` | offcanvas, icon, none | ShadSidebar |
+| `SidebarSide` | left, right | ShadSidebar |
+| `SidebarVariant` | sidebar, floating, inset | ShadSidebar |
+| `SortDirection` | asc, desc | ShadDataTable |
+| `SwitchSize` | defaultSize, sm | ShadSwitch |
+| `TabsListVariant` | defaultVariant, line | ShadTabsList |
+| `ToastVariant` | defaultVariant, destructive | ShadToast |
+| `ToggleGroupSize` | defaultSize, sm, lg | ShadToggleGroup |
+| `ToggleGroupType` | single, multiple | ShadToggleGroup |
+| `ToggleGroupVariant` | defaultVariant, outline | ShadToggleGroup |
+| `ToggleSize` | defaultSize, sm, lg | ShadToggle |
+| `ToggleVariant` | defaultVariant, outline | ShadToggle |
+| `TooltipSide` | top, right, bottom, left | ShadTooltipContent |
+
+---
+
+## Authentication Blocks
+
+Pre-built authentication page blocks. All accept `{String? className, void Function()? onSubmit}`.
+
+| Block | Class | Description |
+|-------|-------|-------------|
+| Login 01 | `ShadLoginBlock01` | Simple card-based login form with email/password |
+| Login 02 | `ShadLoginBlock02` | Login with social providers |
+| Login 03 | `ShadLoginBlock03` | Split-screen login layout |
+| Login 04 | `ShadLoginBlock04` | Minimal centered login |
+| Login 05 | `ShadLoginBlock05` | Login with background image |
+| Signup 01 | `ShadSignupBlock01` | Simple card-based signup form |
+| Signup 02 | `ShadSignupBlock02` | Signup with social providers |
+| Signup 03 | `ShadSignupBlock03` | Split-screen signup layout |
+| Signup 04 | `ShadSignupBlock04` | Multi-step signup |
+| Signup 05 | `ShadSignupBlock05` | Signup with background image |
+
+Usage:
+```dart
+ShadLoginBlock01(onSubmit: () => print('login'))
+ShadSignupBlock01(className: 'max-w-md mx-auto')
+```
+
+---
+
+## Build & Development
+
+### Commands
+```bash
+# Install dependencies
+cd example && npm install
+
+# Build Tailwind CSS
+npx @tailwindcss/cli -i web/styles.tw.css -o web/styles.css
+
+# Run dev server
+cd example && jaspr serve
+
+# Analyze code
+dart analyze
+```
+
+### Critical Pitfalls
+
+1. **`jaspr serve` does NOT rebuild Tailwind CSS** — you must run the Tailwind CLI manually after changing classes.
+
+2. **Tailwind v4 scanner limitation:** The JIT scanner cannot extract arbitrary variant child selectors (e.g., `[&>*]:rounded-none`, `[&>svg]:size-5`) from `.dart` files. Workaround: add them to `@source inline("...")` in `styles.tw.css` (must be a single line) or use raw CSS in `@layer components`.
+
+3. **Text nodes:** Always use `Component.text('...')` for text content, not raw strings.
+
+4. **SVG and non-standard HTML:** Use `Component.element(tag: 'svg', ...)` for elements not in `dom.dart`.
+
+5. **Switch file name:** `switch_component.dart` (not `switch.dart`) because `switch` is a Dart keyword.
+
+6. **Empty rendering:** Use `Component.fragment([])` to render nothing conditionally.
+
+7. **DOM helpers:** Import `package:jaspr/dom.dart` for `div()`, `span()`, `button()`, etc.
